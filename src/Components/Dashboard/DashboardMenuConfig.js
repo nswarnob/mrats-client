@@ -12,7 +12,7 @@ export const dashboardMenu = {
   admin: [
     { label: "Overview", icon: FiHome, to: "/dashboard" },
     { label: "Manage Users", icon: FiUsers, to: "/dashboard/manage-users" },
-    { label: "All Loan", icon: FiCreditCard, to: "/dashboard/all-loan" },
+    { label: "All Loans", icon: FiCreditCard, to: "/dashboard/all-loan" },
     {
       label: "Loan Applications",
       icon: FiCreditCard,

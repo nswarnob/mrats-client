@@ -45,7 +45,10 @@ const AuthProvider = ({ children }) => {
 
   //updateuser data
   const updateUser = (updatedData) => {
-    return updateProfile(auth.currentUser, updatedData);
+    if (!user) {
+      throw new Error("No authenticated user found");
+    }
+    return updateProfile(user, updatedData);
   };
 
   //signin with google

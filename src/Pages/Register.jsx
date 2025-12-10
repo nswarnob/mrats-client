@@ -67,8 +67,6 @@ const Register = () => {
         photoURL: user.photoURL,
         role: "borrower",
       });
-
-
       toast.success("Registered successfully with Google!");
       navigate("/");
     } catch (error) {

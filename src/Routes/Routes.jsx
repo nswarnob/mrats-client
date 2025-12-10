@@ -40,11 +40,11 @@ export const router = createBrowserRouter([
         element: <AdminDashboard></AdminDashboard>,
       },
       {
-        path: "/dashboard/apply-loan",
+        path: "apply-loan",
         element: <ApplyLoan></ApplyLoan>,
       },
       {
-        path: "/dashboard/manage-users",
+        path: "manage-users",
         element: <ManageUser></ManageUser>,
       },
     ],
