@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../Layouts/MainLayout";
 import PrimaryButton from "../ui/PrimaryButton";
 
 const ApplyLoan = () => {

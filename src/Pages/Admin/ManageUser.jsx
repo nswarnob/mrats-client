@@ -1,5 +1,4 @@
 import React from "react";
-import DashboardLayout from "../../Layouts/DashboardLayout";
 
 const users = [
   {
@@ -11,7 +10,7 @@ const users = [
   { id: 2, name: "Kamal Uddin", email: "kamal@example.com", role: "manager" },
 ];
 
-const ManageUsers = () => {
+const ManageUser = () => {
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -62,4 +61,4 @@ const ManageUsers = () => {
   );
 };
 
-export default ManageUsers;
+export default ManageUser;
