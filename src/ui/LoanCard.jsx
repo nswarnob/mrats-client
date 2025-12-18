@@ -1,6 +1,7 @@
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
 import PrimaryButton from "./PrimaryButton";
+import { Link } from "react-router";
 
 const LoanCard = ({ title, category, interest, maxLimit, onView }) => {
   return (
@@ -22,13 +23,15 @@ const LoanCard = ({ title, category, interest, maxLimit, onView }) => {
         </div>
       </div>
 
-      <PrimaryButton
-        className="mt-4 w-full justify-between px-4 py-2 text-xs"
-        onClick={onView}
-      >
-        View Details
-        <FiArrowRight className="text-sm" />
-      </PrimaryButton>
+      <Link to={`/loans/${loan._id}`}>
+        <PrimaryButton
+          className="mt-4 w-full justify-between px-4 py-2 text-xs"
+          onClick={onView}
+        >
+          View Details
+          <FiArrowRight className="text-sm" />
+        </PrimaryButton>
+      </Link>
     </div>
   );
 };

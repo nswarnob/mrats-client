@@ -4,7 +4,7 @@ import HomePage from "../Pages/HomePage";
 import Login from "../Pages/Login";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Register from "../Pages/Register";
-import ApplyLoan from "../Pages/ApplyLoan";
+import ApplyLoan from "../Components/Dashboard/ApplyLoan";
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import ManageUser from "../Pages/Admin/ManageUser";
 import AllLoans from "../Pages/AllLoans";
@@ -12,6 +12,8 @@ import Contact from "../ui/Contact";
 import AboutUs from "../ui/AboutUs";
 import PrivateRoute from "./PrivateRoute";
 import DashboardProfile from "../Components/Dashboard/DashboardProfile";
+import MyLoans from "../Components/Dashboard/MyLoans";
+import LoanDetails from "../Pages/LoanDetails";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <AboutUs></AboutUs>,
       },
+      {
+        path: "/loans/:id",
+        element: (
+          <PrivateRoute>
+            <LoanDetails></LoanDetails>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -68,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/profile",
         element: <DashboardProfile></DashboardProfile>,
+      },
+      {
+        path: "/dashboard/my-loans",
+        element: <MyLoans></MyLoans>,
       },
     ],
   },
