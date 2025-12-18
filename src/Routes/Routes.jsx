@@ -8,6 +8,10 @@ import ApplyLoan from "../Pages/ApplyLoan";
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import ManageUser from "../Pages/Admin/ManageUser";
 import AllLoans from "../Pages/AllLoans";
+import Contact from "../ui/Contact";
+import AboutUs from "../ui/AboutUs";
+import PrivateRoute from "./PrivateRoute";
+import DashboardProfile from "../Components/Dashboard/DashboardProfile";
 
 export const router = createBrowserRouter([
   {
@@ -19,34 +23,51 @@ export const router = createBrowserRouter([
         element: <HomePage></HomePage>,
       },
       {
-        path: "login",
+        path: "/login",
         element: <Login></Login>,
       },
       {
-        path: "register",
+        path: "/register",
         element: <Register></Register>,
       },
       {
-        path: "all-loans",
+        path: "/all-loans",
         element: <AllLoans></AllLoans>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/about",
+        element: <AboutUs></AboutUs>,
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        {" "}
+        <DashboardLayout></DashboardLayout>{" "}
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
         element: <AdminDashboard></AdminDashboard>,
       },
       {
-        path: "apply-loan",
+        path: "/dashboard/apply-loan",
         element: <ApplyLoan></ApplyLoan>,
       },
       {
-        path: "manage-users",
+        path: "/dashboard/manage-users",
         element: <ManageUser></ManageUser>,
+      },
+      {
+        path: "/dashboard/profile",
+        element: <DashboardProfile></DashboardProfile>,
       },
     ],
   },

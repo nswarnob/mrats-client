@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { Link } from "react-router";
+import { AuthContext } from "../../Provider/AuthProvider";
 
-const Navbar = ({ isAuthed = false, onToggleTheme, darkMode }) => {
+const Navbar = ({ onToggleTheme, darkMode }) => {
+  const { user, loading } = useContext(AuthContext);
+
   return (
     <header className="sticky top-0 z-40 border-b border-purple-100/40 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -31,14 +34,21 @@ const Navbar = ({ isAuthed = false, onToggleTheme, darkMode }) => {
             Contact
           </a>
 
-          {isAuthed ? (
+          {user ? (
             <>
               <a href="/dashboard" className="hover:text-[#6B4DF8]">
                 Dashboard
               </a>
-              <button className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 text-xs font-semibold text-purple-700">
-                MJ
-              </button>
+              <Link
+                to={"/dashboard/profile"}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 text-xs font-semibold text-purple-700"
+              >
+                <img
+                  src={user?.photoURL || "/default-avatar.png"}
+                  className="rounded-full"
+                  alt=""
+                />
+              </Link>
               <button className="text-xs font-semibold text-red-500">
                 Logout
               </button>
