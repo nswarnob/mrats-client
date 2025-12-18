@@ -1,9 +1,10 @@
 import React from "react";
 import { FiPlayCircle } from "react-icons/fi";
-import MainLayout from "../Layouts/MainLayout";
 import PrimaryButton from "../ui/PrimaryButton";
 import StatCard from "../ui/StatCard";
 import LoanCard from "../ui/LoanCard";
+import AboutUs from "../ui/AboutUs";
+import Contact from "../ui/Contact";
 
 const HomePage = () => {
   const loans = [
@@ -68,7 +69,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
       {/* Available Loans */}
       <section className="mt-14">
         <div className="mb-6 flex items-end justify-between">
@@ -91,7 +91,6 @@ const HomePage = () => {
           ))}
         </div>
       </section>
-
       {/* How it works */}
       <section className="mt-14 rounded-3xl bg-white p-6 shadow-lg shadow-purple-200/70">
         <h2 className="text-xl font-semibold text-slate-900">
@@ -115,6 +114,13 @@ const HomePage = () => {
             )
           )}
         </div>
+      </section>
+      /About Us
+      <section>
+        <AboutUs></AboutUs>
+      </section>
+      <section>
+        <Contact></Contact>
       </section>
     </div>
   );
