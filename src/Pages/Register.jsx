@@ -5,7 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import PrimaryButton from "../ui/PrimaryButton";
 import { toast } from "react-toast";
 import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
+import axiosPublic from "../../api/axiosPublic";
 
 const Register = () => {
   const { createUser, updateUser, signInWithGoogle } = useContext(AuthContext);
@@ -27,7 +27,7 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    const { Name, email, password, photoURL, role} = data;
+    const { Name, email, password, photoURL, role } = data;
 
     // uppercase + lowercase + length >= 6
     const hasUpper = /[A-Z]/.test(password);
@@ -43,12 +43,16 @@ const Register = () => {
       await createUser(email, password);
       await updateUser({ displayName: Name, photoURL });
 
-  
-      await axios.post("/users", { name: Name, email, photoURL, role });
+      await axiosPublic.post("/users", {
+        name: Name,
+        email,
+        photoURL,
+        role,
+      });
 
       toast.success("Registered successfully!");
       reset();
-      navigate("/"); // or "/dashboard"
+      navigate("/");
     } catch (error) {
       console.error(error);
       toast.error(error?.message || "Registration failed");
@@ -60,8 +64,7 @@ const Register = () => {
       const result = await signInWithGoogle();
       const user = result.user;
 
-      
-      await axios.post("/users", {
+      await axiosPublic.post("/users", {
         name: user.displayName,
         email: user.email,
         photoURL: user.photoURL,

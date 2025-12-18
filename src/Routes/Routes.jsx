@@ -7,6 +7,7 @@ import Register from "../Pages/Register";
 import ApplyLoan from "../Pages/ApplyLoan";
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import ManageUser from "../Pages/Admin/ManageUser";
+import AllLoans from "../Pages/AllLoans";
 
 export const router = createBrowserRouter([
   {
@@ -25,10 +26,10 @@ export const router = createBrowserRouter([
         path: "register",
         element: <Register></Register>,
       },
-      // {
-      //   path:"all-loans",
-      //   element: <AllLoans></AllLoans>
-      // }
+      {
+        path: "all-loans",
+        element: <AllLoans></AllLoans>,
+      },
     ],
   },
   {
