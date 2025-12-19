@@ -1,37 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useContext, useEffect, useMemo } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { useLocation, useParams } from "react-router";
 import PrimaryButton from "../../ui/PrimaryButton";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axiosPublic from "../../../api/axiosPublic";
 import { toast } from "react-toast";
+import useLoans from "../../hooks/useLoans";
+import useLoan from "../../hooks/useLoan";
 
 const ApplyLoan = () => {
   const { user } = useContext(AuthContext);
-  const { id } = useParams(); // optional
+
+  const { id } = useParams();
   const location = useLocation();
   const stateLoanId = location?.state?.loanId;
 
   const selectedIdFromRouteOrState = id || stateLoanId || "";
 
-  const [loadingLoan, setLoadingLoan] = useState(false);
-  const [loan, setLoan] = useState(null);
-
-  const [loansList, setLoansList] = useState([]);
-  const [loadingList, setLoadingList] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm({
+  const form = useForm({
     defaultValues: {
-      // Loan selector (only used when user opens apply page directly)
       selectedLoanId: selectedIdFromRouteOrState,
-
-      // User fields
       firstName: "",
       lastName: "",
       contactNumber: "",
@@ -45,53 +33,47 @@ const ApplyLoan = () => {
     },
   });
 
-  const selectedLoanId = watch("selectedLoanId");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    control,
+    formState: { errors, isSubmitting },
+  } = form;
 
-  // 1) If user comes without loan id → load all loans for dropdown
+  const selectedLoanId = useWatch({ control, name: "selectedLoanId" });
+
+  // ✅ Fetch all loans (cached)
+  const { data: loansList = [], isLoading: loadingList } = useLoans();
+
+  // ✅ Fetch selected loan details
+  const {
+    data: loan,
+    isLoading: loadingLoan,
+    isError: loanError,
+    error,
+  } = useLoan(selectedLoanId);
+
+  // ✅ If route has loan id, ensure form selectedLoanId is set
   useEffect(() => {
-    if (selectedIdFromRouteOrState) return; // already have a loan to fetch
-
-    const loadLoansList = async () => {
-      try {
-        setLoadingList(true);
-        const res = await axiosPublic.get("/loans");
-        setLoansList(res.data || []);
-      } catch (e) {
-        toast.error("Failed to load loans list", e);
-      } finally {
-        setLoadingList(false);
-      }
-    };
-
-    loadLoansList();
-  }, [selectedIdFromRouteOrState]);
-
-  // 2) When selectedLoanId changes (from route OR dropdown) → fetch that loan and autofill
-  useEffect(() => {
-    if (!selectedLoanId) {
-      setLoan(null);
-      return;
+    if (selectedIdFromRouteOrState) {
+      setValue("selectedLoanId", selectedIdFromRouteOrState, {
+        shouldValidate: true,
+      });
     }
+  }, [selectedIdFromRouteOrState, setValue]);
 
-    const fetchLoan = async () => {
-      try {
-        setLoadingLoan(true);
-        const res = await axiosPublic.get(`/loans/${selectedLoanId}`);
-        setLoan(res.data);
+  // ✅ show error toast once
+  useMemo(() => {
+    if (loanError) {
+      toast.error(
+        error?.response?.data?.message || "Failed to load selected loan"
+      );
+    }
+  }, [loanError, error]);
 
-        // OPTIONAL: you can also set default max limit validations later
-      } catch (e) {
-        toast.error("Failed to load selected loan", e);
-        setLoan(null);
-      } finally {
-        setLoadingLoan(false);
-      }
-    };
-
-    fetchLoan();
-  }, [selectedLoanId]);
-
-  // Helper fields for auto-filled UI
+  // Helper fields
   const loanTitle = loan?.title || "";
   const interestRate = loan?.interestRate ?? loan?.interest ?? "";
   const maxLimit = loan?.maxLimit ?? "";
@@ -133,6 +115,9 @@ const ApplyLoan = () => {
     }
   };
 
+  console.log("Selected Loan ID:", selectedLoanId);
+  console.log("Fetched Loan:", loan);
+
   return (
     <div className="px-4 py-10">
       <div className="mx-auto max-w-2xl rounded-3xl bg-white p-8 shadow-xl shadow-purple-200/70">
@@ -147,12 +132,13 @@ const ApplyLoan = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="mt-6 grid gap-4 md:grid-cols-2"
         >
-          {/* If user did NOT come from a loan card/details → show dropdown */}
+          {/* Only show dropdown if user didn't come from loan details/card */}
           {!selectedIdFromRouteOrState && (
             <div className="md:col-span-2">
               <label className="text-xs font-medium text-slate-700">
                 Choose a Loan
               </label>
+
               <select
                 {...register("selectedLoanId", {
                   required: "Please select a loan",
@@ -162,12 +148,14 @@ const ApplyLoan = () => {
                 <option value="">
                   {loadingList ? "Loading loans..." : "Select one"}
                 </option>
+
                 {loansList.map((l) => (
                   <option key={l._id} value={l._id}>
                     {l.title} — {l.category}
                   </option>
                 ))}
               </select>
+
               {errors.selectedLoanId && (
                 <p className="mt-1 text-[10px] text-red-500">
                   {errors.selectedLoanId.message}
@@ -291,11 +279,6 @@ const ApplyLoan = () => {
               })}
               className="mt-1 w-full rounded-xl border border-purple-100 bg-purple-50/30 px-3 py-2 text-sm focus:border-[#6B4DF8] focus:ring-2 focus:ring-purple-200"
             />
-            {errors.incomeSource && (
-              <p className="mt-1 text-[10px] text-red-500">
-                {errors.incomeSource.message}
-              </p>
-            )}
           </div>
 
           <div>

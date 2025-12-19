@@ -23,7 +23,7 @@ const LoanCard = ({ title, category, interest, maxLimit, onView }) => {
         </div>
       </div>
 
-      <Link to={`/loans/${loan._id}`}>
+      <Link to={`/`}>
         <PrimaryButton
           className="mt-4 w-full justify-between px-4 py-2 text-xs"
           onClick={onView}

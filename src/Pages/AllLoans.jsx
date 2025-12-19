@@ -1,40 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router";
 import { FiSearch } from "react-icons/fi";
-import axiosPublic from "../../api/axiosPublic";
+import useLoans from "../hooks/useLoans";
+import Loader from "../ui/Loader";
 
 const AllLoans = () => {
-  const [loans, setLoans] = useState([]);
-  const [filteredLoans, setFilteredLoans] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const { data: loans = [], isLoading, isError } = useLoans();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
-  useEffect(() => {
-    const fetchLoans = async () => {
-      try {
-        setLoading(true);
-        const res = await axiosPublic.get("/loans");
-        setLoans(res.data || []);
-        setFilteredLoans(res.data || []);
-        setError("");
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load loans. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const categories = useMemo(() => {
+    return Array.from(new Set(loans.map((l) => l.category).filter(Boolean)));
+  }, [loans]);
 
-    fetchLoans();
-  }, []);
-
-  // simple search + category filter
-  useEffect(() => {
+  const filteredLoans = useMemo(() => {
     let data = [...loans];
 
-    if (searchTerm) {
+    if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase();
       data = data.filter(
         (loan) =>
@@ -49,25 +32,18 @@ const AllLoans = () => {
       );
     }
 
-    setFilteredLoans(data);
-  }, [searchTerm, categoryFilter, loans]);
+    return data;
+  }, [loans, searchTerm, categoryFilter]);
 
-  // collect categories for filter dropdown
-  const categories = Array.from(
-    new Set(loans.map((loan) => loan.category).filter(Boolean))
-  );
-
-  if (loading) {
-    return (
-      <div className="flex justify-center py-16">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-purple-400 border-t-transparent" />
-      </div>
-    );
+  if (isLoading) {
+    return <Loader></Loader>;
   }
 
-  if (error) {
+  if (isError) {
     return (
-      <div className="py-16 text-center text-sm text-red-500">{error}</div>
+      <div className="py-16 text-center text-sm text-red-500">
+        Failed to load loans. Please try again.
+      </div>
     );
   }
 
@@ -93,7 +69,7 @@ const AllLoans = () => {
             <input
               type="text"
               placeholder="Search by title or category"
-              className="ml-2 w-full bg-transparent text-xs outline-none placeholder:text-slate-300"
+              className="ml-2 w-full bg-transparent text-xs text-black outline-none placeholder:text-slate-300"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -101,17 +77,29 @@ const AllLoans = () => {
 
           {/* Category filter */}
           <select
-            className="rounded-full border border-purple-100 bg-white px-3 py-1.5 text-xs shadow-sm shadow-purple-100/60"
+            className="rounded-full outline-none bg-white px-3 py-1.5 text-xs text-black shadow-sm shadow-purple-100/60"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
           >
             <option value="all">All Categories</option>
             {categories.map((cat) => (
-              <option key={cat} value={cat}>
+              <option  key={cat} value={cat}>
                 {cat}
               </option>
             ))}
           </select>
+
+          {/* Optional reset */}
+          <button
+            type="button"
+            onClick={() => {
+              setSearchTerm("");
+              setCategoryFilter("all");
+            }}
+            className="text-xs font-semibold text-[#6B4DF8] hover:underline"
+          >
+            Reset
+          </button>
         </div>
       </header>
 
@@ -136,6 +124,7 @@ const AllLoans = () => {
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                 )}
+
                 <span className="absolute left-3 top-3 inline-flex rounded-full bg-black/50 px-2 py-0.5 text-[10px] font-medium text-purple-50 backdrop-blur">
                   {loan.category}
                 </span>
@@ -146,19 +135,21 @@ const AllLoans = () => {
                 <h2 className="text-sm font-semibold text-slate-900 line-clamp-2">
                   {loan.title}
                 </h2>
+
                 <p className="mt-1 text-[11px] text-slate-500 line-clamp-3">
                   {loan.description}
                 </p>
 
                 <div className="mt-3 flex flex-wrap gap-2 text-[11px]">
                   <span className="inline-flex items-center rounded-full bg-purple-50 px-2 py-0.5 text-[#6B4DF8] ring-1 ring-purple-100">
-                    Interest:{" "}
+                    Interest:
                     <span className="ml-1 font-semibold">
-                      {loan.interestRate}%
+                      {loan.interestRate ?? loan.interest}%
                     </span>
                   </span>
+
                   <span className="inline-flex items-center rounded-full bg-slate-50 px-2 py-0.5 text-slate-600 ring-1 ring-slate-100">
-                    Max Limit:{" "}
+                    Max Limit:
                     <span className="ml-1 font-semibold">
                       ${loan.maxLimit?.toLocaleString?.() || loan.maxLimit}
                     </span>
@@ -169,7 +160,7 @@ const AllLoans = () => {
                   <span>
                     EMI Plans:{" "}
                     <span className="font-medium text-slate-600">
-                      {loan.emiPlans?.join(", ")}
+                      {loan.emiPlans?.join(", ") || "N/A"}
                     </span>
                   </span>
                 </div>
