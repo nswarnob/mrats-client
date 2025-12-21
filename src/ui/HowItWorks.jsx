@@ -9,7 +9,7 @@ const HowItWorks = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-3xl md:text-4xl font-bold text-center text-slate-900"
+        className="text-3xl md:text-4xl font-semi-bold text-center text-slate-900"
       >
         How <span className="text-[#6B4DF8]">LoanLink</span> Works
       </motion.h2>

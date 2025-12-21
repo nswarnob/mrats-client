@@ -83,7 +83,7 @@ const AllLoans = () => {
           >
             <option value="all">All Categories</option>
             {categories.map((cat) => (
-              <option  key={cat} value={cat}>
+              <option key={cat} value={cat}>
                 {cat}
               </option>
             ))}
@@ -168,7 +168,7 @@ const AllLoans = () => {
                 {/* Button */}
                 <div className="mt-4 flex justify-end">
                   <Link
-                    to={`/loans/${loan._id}`}
+                    to={`/loan/${loan._id}`}
                     className="inline-flex items-center rounded-full bg-linear-to-r from-[#6B4DF8] to-[#A787FF] px-4 py-1.5 text-xs font-medium text-white shadow-sm shadow-purple-300/60 transition hover:shadow-md hover:shadow-purple-400/70"
                   >
                     View Details

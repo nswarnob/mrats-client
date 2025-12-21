@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import PrimaryButton from "../ui/PrimaryButton";
 import { toast } from "react-toast";
-
 import Loader from "../ui/Loader";
 import useLoan from "../hooks/useLoan";
 

@@ -1,2 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap");
+
 @import "tailwindcss";
 @plugin "daisyui";
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.heading {
+  font-family: "Manrope", system-ui, sans-serif;
+}
+a.active {
+  @apply text-purple-600 font-semibold;
+}

@@ -10,32 +10,70 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.init";
+
 import { toast } from "react-toast";
+import axiosPublic from "../../api/axiosPublic";
 
 export const AuthContext = createContext();
-
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState("borrower");
   const [loading, setLoading] = useState(true);
 
+  // ✅ Create JWT cookie after login/register
+  const createJwtCookie = async (email) => {
+    try {
+      const res = await axiosPublic.get(`/users/role?email=${email}`);
+      const dbRole = res.data?.role || "borrower";
+      setRole(dbRole);
+
+      await axiosPublic.post("/jwt", { email, role: dbRole });
+    } catch (err) {
+      console.error("JWT cookie create failed:", err);
+    }
+  };
+
   //login with email and password
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    return result;
   };
 
   //signin with email and password
   const signIn = async (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    await createJwtCookie(result.user.email);
+
+    toast.success("Login successful!");
+    return result;
+  };
+
+  //signin with google
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    const result = await signInWithPopup(auth, googleProvider);
+
+    await createJwtCookie(result.user.email);
+    toast.success("Login successful!");
+    return result;
   };
 
   //signout
-  const logOut = () => {
+  const logOut = async () => {
+    try {
+      await axiosPublic.post("/logout");
+    } catch (e) {
+      console.error("Logout cookie clear failed:", e);
+    }
+
+    await signOut(auth);
+    setUser(null);
+    setRole("borrower");
     toast.success("Logout Successful!");
-    return signOut(auth);
   };
 
   //password reset
@@ -45,29 +83,33 @@ const AuthProvider = ({ children }) => {
 
   //updateuser data
   const updateUser = (updatedData) => {
-    if (!user) {
+    if (!auth.currentUser) {
       throw new Error("No authenticated user found");
     }
-    return updateProfile(user, updatedData);
+    return updateProfile(auth.currentUser, updatedData);
   };
 
-  //signin with google
-  const signInWithGoogle = () => {
-    return signInWithPopup(auth, googleProvider);
-  };
-
-  //user state
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+
+      if (currentUser?.email) {
+        await createJwtCookie(currentUser.email);
+      } else {
+        setRole("borrower");
+      }
+
       setLoading(false);
     });
+
     return () => unsubscribe();
   }, []);
 
   const authData = {
     createUser,
     user,
+    role,
+    setRole,
     setUser,
     signIn,
     logOut,
@@ -76,8 +118,9 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     loading,
   };
+
   return (
-    <AuthContext.Provider value={authData}> {children} </AuthContext.Provider>
+    <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>
   );
 };
 

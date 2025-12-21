@@ -3,7 +3,7 @@ import { FiArrowRight } from "react-icons/fi";
 import PrimaryButton from "./PrimaryButton";
 import { Link } from "react-router";
 
-const LoanCard = ({ title, category, interest, maxLimit, onView }) => {
+const LoanCard = ({ title, category, interest, maxLimit, onView, loan }) => {
   return (
     <div className="flex flex-col justify-between rounded-2xl bg-white p-5 shadow-xl shadow-purple-200/60 border border-purple-100">
       <div>
@@ -23,7 +23,7 @@ const LoanCard = ({ title, category, interest, maxLimit, onView }) => {
         </div>
       </div>
 
-      <Link to={`/`}>
+      <Link to={`/loan/${loan?._id}`}>
         <PrimaryButton
           className="mt-4 w-full justify-between px-4 py-2 text-xs"
           onClick={onView}
