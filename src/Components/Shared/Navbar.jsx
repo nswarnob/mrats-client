@@ -4,7 +4,15 @@ import { Link } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = ({ onToggleTheme, darkMode }) => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-purple-100/40 bg-white/80 backdrop-blur">
@@ -49,7 +57,10 @@ const Navbar = ({ onToggleTheme, darkMode }) => {
                   alt=""
                 />
               </Link>
-              <button className="text-xs font-semibold text-red-500">
+              <button
+                onClick={handleLogout}
+                className="text-xs font-semibold text-red-500"
+              >
                 Logout
               </button>
             </>
