@@ -25,27 +25,27 @@ export const router = createBrowserRouter([
         element: <HomePage></HomePage>,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login></Login>,
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register></Register>,
       },
       {
-        path: "/all-loans",
+        path: "all-loans",
         element: <AllLoans></AllLoans>,
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <Contact></Contact>,
       },
       {
-        path: "/about",
+        path: "about",
         element: <AboutUs></AboutUs>,
       },
       {
-        path: "/loan/:id",
+        path: "loan/:id",
         element: (
           <PrivateRoute>
             <LoanDetails></LoanDetails>
@@ -68,19 +68,19 @@ export const router = createBrowserRouter([
         element: <AdminDashboard></AdminDashboard>,
       },
       {
-        path: "/dashboard/apply-loan",
+        path: "apply-loan",
         element: <ApplyLoan></ApplyLoan>,
       },
       {
-        path: "/dashboard/manage-users",
+        path: "manage-users",
         element: <ManageUser></ManageUser>,
       },
       {
-        path: "/dashboard/profile",
+        path: "profile",
         element: <DashboardProfile></DashboardProfile>,
       },
       {
-        path: "/dashboard/my-loans",
+        path: "my-loans",
         element: <MyLoans></MyLoans>,
       },
     ],
