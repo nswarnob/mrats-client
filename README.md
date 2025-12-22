@@ -1,16 +1,100 @@
-# React + Vite
+# LoanLink – Microloan Request & Approval Tracker System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LoanLink is a full-stack web application designed to streamline the process of microloan requests, review, approval, and management for small financial organizations, NGOs, and microloan providers.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Links
 
-## React Compiler
+- **Client (Frontend):** https://mrats-client.vercel.app
+- **Server (Backend):** https://mrats-server.vercel.app
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📌 Project Purpose
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Many microloan providers struggle to manage loan applications, approvals, and repayments in one centralized system.  
+LoanLink solves this by offering a secure, role-based, and user-friendly loan management platform.
+
+---
+
+## 🚀 Key Features
+
+### 🔐 Authentication & Security
+
+- Firebase Authentication (Email/Password & Google Login)
+- JWT-based authorization using HTTP-only cookies
+- Protected private routes
+- Role-based access control (Admin, Manager, Borrower)
+
+### 🏠 Public Pages
+
+- Home page with featured loans
+- All Loans page with search and filter
+- Loan Details page
+- About Us and Contact sections
+- Responsive UI (mobile, tablet, desktop)
+- Dark / Light theme toggle
+
+### 📊 Dashboard & UI
+
+- Unified dashboard layout using React Router Outlet
+- Loading spinners during data fetching
+- Toast notifications for all actions
+- Dynamic page titles
+- Custom 404 page
+
+### 👤 Borrower Features
+
+- Apply for microloans
+- Auto-filled loan application when coming from loan card
+- Manual loan selection when accessing apply page directly
+- View personal loan applications
+- Cancel pending loan applications
+- Pay application fee (Stripe – demo integration)
+
+---
+
+## 🧩 Technologies Used
+
+### Frontend
+
+- React (Vite)
+- React Router DOM
+- React Hook Form
+- TanStack React Query
+- Tailwind CSS
+- Framer Motion
+- Axios
+- Firebase Authentication
+- React Icons
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB (Atlas)
+- JWT (JSON Web Token)
+- Cookie Parser
+- CORS
+- Vercel (Serverless Deployment)
+
+---
+
+---working---
+
+### 🧑‍💼 Manager Features
+
+- Add new loan products
+- Manage own loans
+- View pending applications
+- Approve or reject loan requests
+- View approved loans
+
+### 🛠️ Admin Features
+
+- Manage users and roles
+- Suspend users with reason
+- View all loans
+- Control which loans appear on Home page
+- View all loan applications with filters
