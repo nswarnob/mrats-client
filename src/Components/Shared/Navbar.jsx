@@ -2,11 +2,10 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { FiMenu, FiX, FiMoon, FiSun } from "react-icons/fi";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { ThemeContext } from "../../Provider/ThemeProvider";
+import ThemeControler from "../../ui/ThemeController";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const [open, setOpen] = useState(false);
 
@@ -96,29 +95,17 @@ const Navbar = () => {
           )}
 
           {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-purple-200 text-purple-700 hover:bg-purple-50 transition
-                       dark:border-white/10 dark:text-slate-100 dark:hover:bg-white/10"
-            aria-label="Toggle theme"
-            title="Toggle theme"
-          >
-            {theme === "nord" ? <FiSun /> : <FiMoon />}
-          </button>
+          <div>
+            <ThemeControler></ThemeControler>
+          </div>
         </nav>
 
         {/* Mobile Buttons */}
         <div className="flex items-center gap-2 md:hidden">
           {/* Theme toggle on mobile too */}
-          <button
-            onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-purple-200 text-purple-700 hover:bg-purple-50 transition
-                       dark:border-white/10 dark:text-slate-100 dark:hover:bg-white/10"
-            aria-label="Toggle theme"
-            title="Toggle theme"
-          >
-            {theme === "dark" ? <FiSun /> : <FiMoon />}
-          </button>
+          <div>
+            <ThemeControler></ThemeControler>
+          </div>
 
           <button
             onClick={() => setOpen((p) => !p)}
