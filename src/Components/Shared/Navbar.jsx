@@ -103,7 +103,7 @@ const Navbar = () => {
             aria-label="Toggle theme"
             title="Toggle theme"
           >
-            {theme === "nord-dark" ? <FiSun /> : <FiMoon />}
+            {theme === "nord" ? <FiSun /> : <FiMoon />}
           </button>
         </nav>
 
