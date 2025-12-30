@@ -1,8 +1,11 @@
 import React from "react";
 import { FiEye, FiXCircle, FiDollarSign } from "react-icons/fi";
 import { Link } from "react-router";
+import useApplications from "../../hooks/useApplication";
 
-const MyLoans = ({ loans = [], onView, onCancel, onPay }) => {
+const MyLoans = ({ onView, onCancel, onPay }) => {
+  const loans = useApplications() || [];
+
   return (
     <div className="w-full">
       {/* Title */}

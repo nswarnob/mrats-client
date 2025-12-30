@@ -107,16 +107,13 @@ const ApplyLoan = () => {
     };
 
     try {
-      await axiosPublic.post("/loan-applications", payload);
+      await axiosPublic.post("/application-loans", payload);
       toast.success("Application submitted!");
       reset({ ...data, loanAmount: "", reason: "", notes: "" });
     } catch (e) {
       toast.error(e?.response?.data?.message || "Failed to submit");
     }
   };
-
-  console.log("Selected Loan ID:", selectedLoanId);
-  console.log("Fetched Loan:", loan);
 
   return (
     <div className="px-4 py-10">

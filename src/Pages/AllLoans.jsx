@@ -52,7 +52,7 @@ const AllLoans = () => {
       {/* Header */}
       <header className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900 md:text-3xl">
+          <h1 className="text-2xl font-semibold text-primary md:text-3xl">
             All <span className="text-[#6B4DF8]">Loans</span>
           </h1>
           <p className="mt-1 text-xs text-slate-500 md:text-sm">
