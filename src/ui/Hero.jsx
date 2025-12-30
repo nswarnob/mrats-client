@@ -16,7 +16,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mt-3 text-3xl heading text-slate-900 md:text-4xl"
+          className="mt-3 text-3xl heading text-primary  md:text-4xl"
         >
           Get Microloans, <span className="text-[#6B4DF8]">Fast</span> and Easy.
         </motion.h1>

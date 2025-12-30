@@ -28,7 +28,7 @@ const AvailableLoans = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-semi-bold text-slate-900 md:text-4xl"
+            className="text-3xl font-semi-bold text-primary md:text-4xl"
           >
             Available <span className="text-[#6B4DF8]">Loans</span>
           </motion.h2>
@@ -50,7 +50,7 @@ const AvailableLoans = () => {
       ) : (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {featuredLoans.map((loan) => (
-            <LoanCard key={loan._id} {...loan} loan={loan}/>
+            <LoanCard key={loan._id} {...loan} loan={loan} />
           ))}
         </div>
       )}
