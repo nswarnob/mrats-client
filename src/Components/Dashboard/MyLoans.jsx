@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import useApplications from "../../hooks/useApplication";
 
 const MyLoans = ({ onView, onCancel, onPay }) => {
-  const loans = useApplications() || [];
+  const { data: loans = [] } = useApplications();
 
   return (
     <div className="w-full">

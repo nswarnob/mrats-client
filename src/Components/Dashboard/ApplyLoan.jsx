@@ -44,10 +44,10 @@ const ApplyLoan = () => {
 
   const selectedLoanId = useWatch({ control, name: "selectedLoanId" });
 
-  // ✅ Fetch all loans (cached)
+  // Fetch all loans (cached)
   const { data: loansList = [], isLoading: loadingList } = useLoans();
 
-  // ✅ Fetch selected loan details
+  // Fetch selected loan details
   const {
     data: loan,
     isLoading: loadingLoan,
@@ -55,7 +55,7 @@ const ApplyLoan = () => {
     error,
   } = useLoan(selectedLoanId);
 
-  // ✅ If route has loan id, ensure form selectedLoanId is set
+  // If route has loan id, ensure form selectedLoanId is set
   useEffect(() => {
     if (selectedIdFromRouteOrState) {
       setValue("selectedLoanId", selectedIdFromRouteOrState, {
@@ -64,7 +64,7 @@ const ApplyLoan = () => {
     }
   }, [selectedIdFromRouteOrState, setValue]);
 
-  // ✅ show error toast once
+  // show error toast once
   useMemo(() => {
     if (loanError) {
       toast.error(
