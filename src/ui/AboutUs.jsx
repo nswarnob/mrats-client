@@ -8,7 +8,7 @@ const AboutUs = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-3xl md:text-4xl font-semi-bold text-slate-900 text-center"
+        className="text-3xl md:text-4xl font-semi-bold text-primary text-center"
       >
         About <span className="text-[#6B4DF8]">LoanLink</span>
       </motion.h2>

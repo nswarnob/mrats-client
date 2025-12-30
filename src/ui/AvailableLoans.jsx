@@ -39,7 +39,7 @@ const AvailableLoans = () => {
             transition={{ duration: 0.6 }}
             className="mt-2 text-sm text-slate-600 md:text-base"
           >
-            Loaded from MongoDB – showing featured microloan products.
+           Here is our available loan options. Apply now and take the first step towards financial freedom!
           </motion.p>
         </div>
       </div>

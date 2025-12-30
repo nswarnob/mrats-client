@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
-import { FiMenu, FiX, FiMoon, FiSun } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import { AuthContext } from "../../Provider/AuthProvider";
 import ThemeControler from "../../ui/ThemeController";
 
@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const navLinkClass = ({ isActive }) =>
     `transition hover:text-[#6B4DF8] ${
-      isActive ? "text-[#6B4DF8]" : "text-slate-700 dark:text-slate-200"
+      isActive ? "text-[#6B4DF8]" : "text-primary dark:text-slate-200"
     }`;
 
   return (
