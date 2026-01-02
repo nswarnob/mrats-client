@@ -17,14 +17,14 @@ const DashboardProfile = () => {
   const name = user?.displayName || "Unknown User";
   const email = user?.email || "No email found";
   const photo = user?.photoURL;
-  const role = userRole || user?.role || "borrower"; // default
+  const role = userRole || user?.role || "borrower"; 
 
   const createdAt = user?.metadata?.creationTime || "Not available";
 
   return (
     <div className="max-w-xl mx-auto space-y-6">
       {/* Top card */}
-      <div className="rounded-2xl bg-linear-to-r from-[#6B4DF8] to-[#A787FF] p-6 text-white shadow-lg shadow-purple-300/60 flex items-center gap-4">
+      <div className="rounded-2xl bg-linear-to-r from-[#6B4DF8] to-[#A787FF] p-4 text-white shadow-lg shadow-purple-300/60 flex items-center gap-4">
         <div className="h-16 w-16 rounded-full bg-white/20 overflow-hidden flex items-center justify-center">
           {photo ? (
             <img

@@ -107,7 +107,7 @@ const LoanDetails = () => {
             <div className="mt-8">
               {canApply ? (
                 <PrimaryButton
-                  onClick={() => navigate(`/apply-loan/${loan._id}`)}
+                  onClick={() => navigate(`/dashboard/apply-loan/${loan._id}`)}
                 >
                   Apply Now
                 </PrimaryButton>

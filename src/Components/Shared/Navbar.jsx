@@ -122,7 +122,7 @@ const Navbar = () => {
       {/* Mobile Drawer */}
       {open && (
         <div className="md:hidden border-t border-purple-100/40 dark:border-white/10 bg-white/90 backdrop-blur dark:bg-[#0F0A1A]/95">
-          <div className="mx-auto max-w-6xl px-4 py-4 space-y-3 text-sm">
+          <div className="mx-auto max-w-6xl px-4 py-4 space-y-3 space-x-1 text-sm">
             <NavLink
               to="/"
               className={navLinkClass}
