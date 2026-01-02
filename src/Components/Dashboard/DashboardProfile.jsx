@@ -3,21 +3,13 @@ import { FiMail, FiUser, FiShield, FiCalendar, FiLogOut } from "react-icons/fi";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const DashboardProfile = () => {
-  const { user, userRole, logOut } = useContext(AuthContext);
-
-  const handleLogout = async () => {
-    try {
-      await logOut();
-    } catch (err) {
-      console.error("Logout error:", err);
-    }
-  };
+  const { user, userRole } = useContext(AuthContext);
 
   // Fallbacks
   const name = user?.displayName || "Unknown User";
   const email = user?.email || "No email found";
   const photo = user?.photoURL;
-  const role = userRole || user?.role || "borrower"; 
+  const role = userRole || user?.role || "borrower";
 
   const createdAt = user?.metadata?.creationTime || "Not available";
 
@@ -49,14 +41,6 @@ const DashboardProfile = () => {
             <span className="capitalize">{role}</span>
           </p>
         </div>
-
-        <button
-          onClick={handleLogout}
-          className="inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 text-[11px] font-semibold text-[#6B4DF8] hover:bg-white"
-        >
-          <FiLogOut className="text-xs" />
-          Logout
-        </button>
       </div>
 
       {/* Details card */}
