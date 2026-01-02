@@ -31,7 +31,7 @@ const Navbar = () => {
           <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-linear-to-r from-[#6B4DF8] to-[#A787FF] text-white font-bold">
             L
           </div>
-          <span className="text-lg font-semibold tracking-tight text-primary dark:text-slate-100">
+          <span className="text-lg font-semibold tracking-tight text-primary">
             Loan<span className="text-[#6B4DF8]">Link</span>
           </span>
         </Link>
