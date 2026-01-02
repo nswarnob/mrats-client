@@ -72,6 +72,10 @@ export const router = createBrowserRouter([
         element: <ApplyLoan></ApplyLoan>,
       },
       {
+        path: "apply-loan/:id",
+        element: <ApplyLoan></ApplyLoan>,
+      },
+      {
         path: "manage-users",
         element: <ManageUser></ManageUser>,
       },
