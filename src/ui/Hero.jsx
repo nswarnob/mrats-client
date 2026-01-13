@@ -4,8 +4,10 @@ import PrimaryButton from "../ui/PrimaryButton";
 import StatCard from "../ui/StatCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import useApplications from "../hooks/useApplication";
 
 const Hero = () => {
+  const { data: loans = [] } = useApplications();
   return (
     <div className="grid gap-10 md:grid-cols-2 md:items-center">
       <div>
@@ -45,7 +47,7 @@ const Hero = () => {
       <div className="rounded-3xl bg-linear-to-br from-[#6B4DF8] to-[#A787FF] p-6 text-purple-50 shadow-xl shadow-purple-400/40">
         <h3 className="text-sm font-semibold">Live Portfolio Snapshot</h3>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
-          <StatCard label="Active Loans" value="428" />
+          <StatCard label="Active Loans" value={loans.length} />
           <StatCard label="Total Disbursed" value="$215K" />
           <StatCard label="Approval Rate" value="92%" />
           <StatCard label="On-Time Repayments" value="88%" />

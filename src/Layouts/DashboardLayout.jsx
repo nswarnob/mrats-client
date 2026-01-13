@@ -11,7 +11,7 @@ const DashboardLayout = () => {
   const drawerRef = useRef(null);
   const buttonRef = useRef(null);
 
-  // userRole = "admin" | "manager" | "borrower"
+  //  userRole = "admin" | "manager" | "borrower";
   const role = userRole || user?.role || "borrower";
 
   // Build final menu
