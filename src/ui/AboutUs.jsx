@@ -22,27 +22,25 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="mt-4 max-w-2xl mx-auto text-center text-slate-600 text-sm md:text-base"
+        className="mt-4 max-w-2xl mx-auto text-center text-slate-600"
       >
         LoanLink is a modern microloan request & approval system designed to
-        help borrowers, managers, and financial organizations manage loan
-        applications faster, safer, and smarter.
+        streamline the loan process with transparency and trust.
       </motion.p>
 
-      <div className="mt-12">
+      {/* 🔁 AUTO SLIDING CENTER CARD */}
+      <div className="mt-12 max-w-md mx-auto">
         <Swiper
           modules={[Autoplay]}
-          spaceBetween={24}
+          slidesPerView={1}
+          centeredSlides={true}
           loop={true}
+          speed={1000}
           autoplay={{
-            delay: 2500,
+            delay: 2000,
             disableOnInteraction: false,
           }}
-          breakpoints={{
-            320: { slidesPerView: 1 },
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
+          grabCursor={true}
         >
           <SwiperSlide>
             <motion.div
@@ -54,8 +52,7 @@ const AboutUs = () => {
                 User-Friendly
               </h3>
               <p className="mt-2 text-sm text-slate-600">
-                Borrowers and managers enjoy a clean, simple experience that
-                reduces complexity and speeds up decision-making.
+                Clean and simple experience that speeds up decisions.
               </p>
             </motion.div>
           </SwiperSlide>
@@ -70,8 +67,7 @@ const AboutUs = () => {
                 Fast Processing
               </h3>
               <p className="mt-2 text-sm text-slate-600">
-                Apply, track, and manage loans quickly with real-time updates
-                and automated workflows.
+                Real-time updates and automated workflows.
               </p>
             </motion.div>
           </SwiperSlide>
@@ -86,8 +82,7 @@ const AboutUs = () => {
                 Secure & Reliable
               </h3>
               <p className="mt-2 text-sm text-slate-600">
-                All data is protected using modern security standards, ensuring
-                trust and transparency for all users.
+                Protected using modern security standards.
               </p>
             </motion.div>
           </SwiperSlide>
