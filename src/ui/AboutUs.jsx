@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 import { FiUsers, FiTarget, FiShield } from "react-icons/fi";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
+
 const AboutUs = () => {
   return (
     <div className="container mx-auto px-4">
@@ -21,52 +26,72 @@ const AboutUs = () => {
       >
         LoanLink is a modern microloan request & approval system designed to
         help borrowers, managers, and financial organizations manage loan
-        applications faster, safer, and smarter. Our mission is simple:
-        streamline the loan process with transparency and trust.
+        applications faster, safer, and smarter.
       </motion.p>
 
-      {/* Features Row */}
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {/* Card 1 */}
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          className="bg-white rounded-2xl shadow-md p-6 text-center border border-purple-100"
+      <div className="mt-12">
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={24}
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          breakpoints={{
+            320: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
         >
-          <FiUsers className="text-3xl mx-auto text-[#6B4DF8]" />
-          <h3 className="mt-3 font-semibold text-slate-900">User-Friendly</h3>
-          <p className="mt-2 text-sm text-slate-600">
-            Borrowers and managers enjoy a clean, simple experience that reduces
-            complexity and speeds up decision-making.
-          </p>
-        </motion.div>
+          <SwiperSlide>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              className="bg-white rounded-2xl shadow-md p-6 text-center border border-purple-100"
+            >
+              <FiUsers className="text-3xl mx-auto text-[#6B4DF8]" />
+              <h3 className="mt-3 font-semibold text-slate-900">
+                User-Friendly
+              </h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Borrowers and managers enjoy a clean, simple experience that
+                reduces complexity and speeds up decision-making.
+              </p>
+            </motion.div>
+          </SwiperSlide>
 
-        {/* Card 2 */}
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          className="bg-white rounded-2xl shadow-md p-6 text-center border border-purple-100"
-        >
-          <FiTarget className="text-3xl mx-auto text-[#6B4DF8]" />
-          <h3 className="mt-3 font-semibold text-slate-900">Fast Processing</h3>
-          <p className="mt-2 text-sm text-slate-600">
-            Apply, track, and manage loans quickly with real-time updates and
-            automated workflows.
-          </p>
-        </motion.div>
+          <SwiperSlide>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              className="bg-white rounded-2xl shadow-md p-6 text-center border border-purple-100"
+            >
+              <FiTarget className="text-3xl mx-auto text-[#6B4DF8]" />
+              <h3 className="mt-3 font-semibold text-slate-900">
+                Fast Processing
+              </h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Apply, track, and manage loans quickly with real-time updates
+                and automated workflows.
+              </p>
+            </motion.div>
+          </SwiperSlide>
 
-        {/* Card 3 */}
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          className="bg-white rounded-2xl shadow-md p-6 text-center border border-purple-100"
-        >
-          <FiShield className="text-3xl mx-auto text-[#6B4DF8]" />
-          <h3 className="mt-3 font-semibold text-slate-900">
-            Secure & Reliable
-          </h3>
-          <p className="mt-2 text-sm text-slate-600">
-            All data is protected using modern security standards, ensuring
-            trust and transparency for all users.
-          </p>
-        </motion.div>
+          <SwiperSlide>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              className="bg-white rounded-2xl shadow-md p-6 text-center border border-purple-100"
+            >
+              <FiShield className="text-3xl mx-auto text-[#6B4DF8]" />
+              <h3 className="mt-3 font-semibold text-slate-900">
+                Secure & Reliable
+              </h3>
+              <p className="mt-2 text-sm text-slate-600">
+                All data is protected using modern security standards, ensuring
+                trust and transparency for all users.
+              </p>
+            </motion.div>
+          </SwiperSlide>
+        </Swiper>
       </div>
     </div>
   );
