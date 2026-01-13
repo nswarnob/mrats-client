@@ -3,8 +3,8 @@ import { FiUsers, FiTarget, FiShield } from "react-icons/fi";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-
 import "swiper/css";
+
 
 const AboutUs = () => {
   return (
@@ -28,11 +28,11 @@ const AboutUs = () => {
         streamline the loan process with transparency and trust.
       </motion.p>
 
-      {/* 🔁 AUTO SLIDING CENTER CARD */}
+      
       <div className="mt-12 max-w-md mx-auto">
         <Swiper
           modules={[Autoplay]}
-          slidesPerView={1}
+          slidesPerView={3}
           centeredSlides={true}
           loop={true}
           speed={1000}
