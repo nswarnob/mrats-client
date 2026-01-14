@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-
 const AboutUs = () => {
   return (
     <div className="container mx-auto px-4">
@@ -28,11 +27,10 @@ const AboutUs = () => {
         streamline the loan process with transparency and trust.
       </motion.p>
 
-      
       <div className="mt-12 max-w-md mx-auto">
         <Swiper
           modules={[Autoplay]}
-          slidesPerView={3}
+          slidesPerView={1}
           centeredSlides={true}
           loop={true}
           speed={1000}
