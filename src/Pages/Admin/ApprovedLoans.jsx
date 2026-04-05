@@ -1,15 +1,24 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axiosPublic from "../../../api/axiosPublic";
 import { toast } from "react-toast";
+import usePageTitle from "../../hooks/usePageTitle";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const ApprovedLoans = () => {
+  usePageTitle("Approved Loans");
+  const { userRole, user } = useContext(AuthContext);
   const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadApplications = async () => {
       try {
-        const res = await axiosPublic.get("/application-loans");
+        const query =
+          userRole === "manager" && user?.email
+            ? `?managerEmail=${encodeURIComponent(user.email)}`
+            : "";
+        const res = await axiosPublic.get(`/application-loans${query}`);
         setApps(res.data);
       } catch (err) {
         console.error("Failed to load applications:", err);
@@ -20,7 +29,7 @@ const ApprovedLoans = () => {
     };
 
     loadApplications();
-  }, []);
+  }, [userRole, user?.email]);
 
   const approvedApps = useMemo(
     () => apps.filter((app) => app.status === "Approved"),

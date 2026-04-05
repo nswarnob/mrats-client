@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import PrimaryButton from "../ui/PrimaryButton";
 import { toast } from "react-toast";
 import { FcGoogle } from "react-icons/fc";
 import axiosPublic from "../../api/axiosPublic";
+import usePageTitle from "../hooks/usePageTitle";
 
 const Register = () => {
+  usePageTitle("Register");
   const { createUser, updateUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -193,9 +195,9 @@ const Register = () => {
 
         <p className="mt-4 text-center text-[11px] text-slate-500">
           Already have an account?{" "}
-          <a href="/login" className="font-semibold text-[#6B4DF8]">
+          <Link to="/login" className="font-semibold text-[#6B4DF8]">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

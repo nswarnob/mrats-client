@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
-import { FiMail, FiUser, FiShield, FiCalendar, FiLogOut } from "react-icons/fi";
+import { FiMail, FiUser, FiShield, FiCalendar } from "react-icons/fi";
 import { AuthContext } from "../../Provider/AuthProvider";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const DashboardProfile = () => {
+  usePageTitle("Profile");
   const { user, userRole } = useContext(AuthContext);
 
   // Fallbacks

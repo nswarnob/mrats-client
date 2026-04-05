@@ -115,8 +115,14 @@ const Loader = () => {
           <motion.div
             key={idx}
             animate={{
-              x: [Math.cos((idx * Math.PI) / 2) * 80, Math.cos((idx * Math.PI) / 2 + 0.5) * 85],
-              y: [Math.sin((idx * Math.PI) / 2) * 80, Math.sin((idx * Math.PI) / 2 + 0.5) * 85],
+              x: [
+                Math.cos((idx * Math.PI) / 2) * 80,
+                Math.cos((idx * Math.PI) / 2 + 0.5) * 85,
+              ],
+              y: [
+                Math.sin((idx * Math.PI) / 2) * 80,
+                Math.sin((idx * Math.PI) / 2 + 0.5) * 85,
+              ],
             }}
             transition={{
               duration: 3,
@@ -156,9 +162,18 @@ const Loader = () => {
                 style={{
                   position: "absolute",
                   [isHorizontal ? "top" : "left"]: "50%",
-                  [isHorizontal ? "left" : "top"]: angle === 0 ? "-15px" : angle === 90 ? "50%" : angle === 180 ? "auto" : "50%",
-                  [isHorizontal && angle === 180 ? "right" : ""]: angle === 180 ? "-15px" : "",
-                  [!isHorizontal && angle === 90 ? "right" : ""]: angle === 90 ? "-15px" : "",
+                  [isHorizontal ? "left" : "top"]:
+                    angle === 0
+                      ? "-15px"
+                      : angle === 90
+                        ? "50%"
+                        : angle === 180
+                          ? "auto"
+                          : "50%",
+                  [isHorizontal && angle === 180 ? "right" : ""]:
+                    angle === 180 ? "-15px" : "",
+                  [!isHorizontal && angle === 90 ? "right" : ""]:
+                    angle === 90 ? "-15px" : "",
                   transform: `${isHorizontal ? "translateY(-50%)" : "translateX(-50%)"}`,
                 }}
                 className="h-3 w-3 rounded-full bg-gradient-to-r from-purple-400 to-blue-400 shadow-lg shadow-purple-400"

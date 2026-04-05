@@ -1,20 +1,23 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import PrimaryButton from "../ui/PrimaryButton";
 import { toast } from "react-toast";
 import Loader from "../ui/Loader";
 import useLoan from "../hooks/useLoan";
+import usePageTitle from "../hooks/usePageTitle";
 
 const LoanDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user, role } = useContext(AuthContext);
+  const { user, userRole } = useContext(AuthContext);
 
   const { data: loan, isLoading, isError, error } = useLoan(id);
 
+  usePageTitle("Loan Details");
+
   // toast only once when error happens
-  useMemo(() => {
+  useEffect(() => {
     if (isError) {
       toast.error(
         error?.response?.data?.message || "Failed to load loan details",
@@ -42,7 +45,7 @@ const LoanDetails = () => {
   const emiPlans = loan.emiPlans || [];
   const image = loan.image;
 
-  const canApply = !!user && role === "borrower";
+  const canApply = !!user && userRole === "borrower";
 
   return (
     <div className="px-4 py-12">
@@ -109,7 +112,7 @@ const LoanDetails = () => {
             <div className="mt-8">
               {canApply ? (
                 <PrimaryButton
-                  onClick={() => navigate(`/apply-loan/${loan._id}`)}
+                  onClick={() => navigate(`/dashboard/apply-loan/${loan._id}`)}
                 >
                   Apply Now
                 </PrimaryButton>

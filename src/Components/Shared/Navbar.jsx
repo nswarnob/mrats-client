@@ -21,7 +21,9 @@ const Navbar = () => {
 
   const navLinkClass = ({ isActive }) =>
     `relative text-sm font-medium transition-colors ${
-      isActive ? "text-[#6B4DF8]" : "text-slate-700 dark:text-slate-300 hover:text-[#6B4DF8]"
+      isActive
+        ? "text-[#6B4DF8]"
+        : "text-slate-700 dark:text-slate-300 hover:text-[#6B4DF8]"
     } ${isActive ? "after:absolute after:bottom-[-8px] after:left-0 after:w-full after:h-0.5 after:bg-linear-to-r after:from-[#6B4DF8] after:to-[#A787FF]" : ""}`;
 
   return (
@@ -33,7 +35,10 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <Link
+            to="/"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
             <motion.div
               whileHover={{ rotate: 360, scale: 1.1 }}
               transition={{ duration: 0.6 }}
@@ -127,7 +132,10 @@ const Navbar = () => {
                   Login
                 </Link>
 
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
                   <Link
                     to="/register"
                     className="rounded-full bg-linear-to-r from-[#6B4DF8] to-[#A787FF] px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/50 transition-all duration-300"
@@ -165,7 +173,11 @@ const Navbar = () => {
               animate={{ rotate: open ? 180 : 0 }}
               transition={{ duration: 0.3 }}
             >
-              {open ? <FiX className="text-lg" /> : <FiMenu className="text-lg" />}
+              {open ? (
+                <FiX className="text-lg" />
+              ) : (
+                <FiMenu className="text-lg" />
+              )}
             </motion.div>
           </motion.button>
         </motion.div>

@@ -2,8 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import axiosPublic from "../../../api/axiosPublic";
 import { toast } from "react-toast";
 import PrimaryButton from "../../ui/PrimaryButton";
+import usePageTitle from "../../hooks/usePageTitle";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const ManageLoans = () => {
+  usePageTitle("Manage Loans");
+  const { userRole, user } = useContext(AuthContext);
   const [loanList, setLoanList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
@@ -12,7 +17,11 @@ const ManageLoans = () => {
   useEffect(() => {
     const loadLoans = async () => {
       try {
-        const res = await axiosPublic.get("/loans");
+        const query =
+          userRole === "manager" && user?.email
+            ? `?managerEmail=${encodeURIComponent(user.email)}`
+            : "";
+        const res = await axiosPublic.get(`/loans${query}`);
         setLoanList(res.data);
       } catch (err) {
         console.error("Failed to load loans:", err);
@@ -23,7 +32,7 @@ const ManageLoans = () => {
     };
 
     loadLoans();
-  }, []);
+  }, [userRole, user?.email]);
 
   const filteredLoans = useMemo(() => {
     return loanList.filter(

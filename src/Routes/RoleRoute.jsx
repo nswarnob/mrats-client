@@ -5,6 +5,7 @@ import Loader from "../ui/Loader";
 
 const RoleRoute = ({ allowedRoles = [], children }) => {
   const { user, userRole, loading, userSuspended } = useContext(AuthContext);
+  const currentRole = userRole || user?.role || "borrower";
 
   if (loading) {
     return <Loader />;
@@ -30,7 +31,7 @@ const RoleRoute = ({ allowedRoles = [], children }) => {
     );
   }
 
-  if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
+  if (allowedRoles.length > 0 && !allowedRoles.includes(currentRole)) {
     return <Navigate to="/dashboard" replace />;
   }
 

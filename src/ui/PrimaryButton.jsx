@@ -16,13 +16,13 @@ const PrimaryButton = ({ children, className = "", ...props }) => {
       {...props}
     >
       {/* Animated background shine */}
-      <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent 
-        translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
-      
+      <span
+        className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent 
+        translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"
+      ></span>
+
       {/* Content */}
-      <span className="relative flex items-center gap-2">
-        {children}
-      </span>
+      <span className="relative flex items-center gap-2">{children}</span>
     </motion.button>
   );
 };

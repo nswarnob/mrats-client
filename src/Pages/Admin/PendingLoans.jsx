@@ -2,8 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 import axiosPublic from "../../../api/axiosPublic";
 import { toast } from "react-toast";
+import usePageTitle from "../../hooks/usePageTitle";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const PendingLoans = () => {
+  usePageTitle("Pending Applications");
+  const { userRole, user } = useContext(AuthContext);
   const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState(null);
@@ -11,7 +16,11 @@ const PendingLoans = () => {
   useEffect(() => {
     const loadApplications = async () => {
       try {
-        const res = await axiosPublic.get("/application-loans");
+        const query =
+          userRole === "manager" && user?.email
+            ? `?managerEmail=${encodeURIComponent(user.email)}`
+            : "";
+        const res = await axiosPublic.get(`/application-loans${query}`);
         setApps(res.data);
       } catch (err) {
         console.error("Failed to load applications:", err);
@@ -22,7 +31,7 @@ const PendingLoans = () => {
     };
 
     loadApplications();
-  }, []);
+  }, [userRole, user?.email]);
 
   const pendingApps = useMemo(
     () => apps.filter((app) => app.status === "Pending"),

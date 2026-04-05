@@ -114,13 +114,16 @@ const Footer = () => {
                 </span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
-                A modern microloan request & approval tracker for NGOs, MFIs and small financial organizations.
+                A modern microloan request & approval tracker for NGOs, MFIs and
+                small financial organizations.
               </p>
             </motion.div>
 
             {/* Quick Links */}
             <motion.div variants={itemVariants}>
-              <h4 className="mb-4 text-sm font-semibold text-white">Quick Links</h4>
+              <h4 className="mb-4 text-sm font-semibold text-white">
+                Quick Links
+              </h4>
               <ul className="space-y-2">
                 {quickLinks.map((link) => (
                   <li key={link.label}>
@@ -159,7 +162,9 @@ const Footer = () => {
 
             {/* Social */}
             <motion.div variants={itemVariants}>
-              <h4 className="mb-4 text-sm font-semibold text-white">Follow Us</h4>
+              <h4 className="mb-4 text-sm font-semibold text-white">
+                Follow Us
+              </h4>
               <div className="flex gap-3">
                 {socialLinks.map((social) => {
                   const Icon = social.icon;

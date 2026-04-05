@@ -60,7 +60,10 @@ const AboutUs = () => {
         initial="hidden"
         whileInView="visible"
       >
-        <motion.div variants={itemVariants} className="inline-flex justify-center mb-4">
+        <motion.div
+          variants={itemVariants}
+          className="inline-flex justify-center mb-4"
+        >
           <div className="inline-flex items-center gap-2 rounded-full bg-purple-100/80 dark:bg-purple-900/30 px-4 py-2">
             <span className="h-2 w-2 rounded-full bg-purple-500 animate-pulse"></span>
             <span className="text-xs font-semibold uppercase tracking-wider text-purple-700 dark:text-purple-300">
@@ -80,7 +83,8 @@ const AboutUs = () => {
           variants={itemVariants}
           className="mt-4 text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
         >
-          LoanLink is a modern microloan request & approval system designed to streamline the loan process with transparency and trust.
+          LoanLink is a modern microloan request & approval system designed to
+          streamline the loan process with transparency and trust.
         </motion.p>
       </motion.div>
 
@@ -179,8 +183,12 @@ const AboutUs = () => {
             whileHover={{ scale: 1.05, y: -4 }}
             className="p-4 rounded-xl bg-purple-50/50 dark:bg-purple-900/20 border border-purple-200/50 dark:border-purple-700/30"
           >
-            <div className="text-2xl md:text-3xl font-bold gradient-text">{stat.value}</div>
-            <div className="mt-2 text-xs md:text-sm text-slate-600 dark:text-slate-400 font-medium">{stat.label}</div>
+            <div className="text-2xl md:text-3xl font-bold gradient-text">
+              {stat.value}
+            </div>
+            <div className="mt-2 text-xs md:text-sm text-slate-600 dark:text-slate-400 font-medium">
+              {stat.label}
+            </div>
           </motion.div>
         ))}
       </motion.div>

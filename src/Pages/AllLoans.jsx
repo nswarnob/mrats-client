@@ -3,8 +3,10 @@ import { Link } from "react-router";
 import { FiSearch } from "react-icons/fi";
 import useLoans from "../hooks/useLoans";
 import Loader from "../ui/Loader";
+import usePageTitle from "../hooks/usePageTitle";
 
 const AllLoans = () => {
+  usePageTitle("All Loans");
   const { data: loans = [], isLoading, isError } = useLoans();
 
   const [searchTerm, setSearchTerm] = useState("");

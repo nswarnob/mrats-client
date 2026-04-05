@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router";
 
 const SidebarItem = ({ icon, label, to }) => {
+  const Icon = icon;
   return (
     <NavLink
       to={to}
@@ -14,7 +15,7 @@ const SidebarItem = ({ icon, label, to }) => {
         }`
       }
     >
-      <span className="text-sm">{icon}</span>
+      <span className="text-sm">{Icon ? <Icon /> : null}</span>
       <span>{label}</span>
     </NavLink>
   );

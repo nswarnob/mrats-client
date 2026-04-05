@@ -60,7 +60,10 @@ const AvailableLoans = () => {
         initial="hidden"
         whileInView="visible"
       >
-        <motion.div variants={itemVariants} className="inline-flex justify-center">
+        <motion.div
+          variants={itemVariants}
+          className="inline-flex justify-center"
+        >
           <div className="inline-flex items-center gap-2 rounded-full bg-purple-100/80 dark:bg-purple-900/30 px-4 py-2">
             <span className="h-2 w-2 rounded-full bg-purple-500 animate-pulse"></span>
             <span className="text-xs font-semibold uppercase tracking-wider text-purple-700 dark:text-purple-300">
@@ -80,7 +83,8 @@ const AvailableLoans = () => {
           variants={itemVariants}
           className="mt-2 text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto"
         >
-          Here are our available loan options. Apply now and take the first step towards financial freedom!
+          Here are our available loan options. Apply now and take the first step
+          towards financial freedom!
         </motion.p>
       </motion.div>
 

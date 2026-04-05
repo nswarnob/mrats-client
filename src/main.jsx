@@ -6,6 +6,7 @@ import { router } from "./Routes/Routes.jsx";
 import AuthProvider from "./Provider/AuthProvider.jsx";
 import ThemeProvider from "./Provider/ThemeProvider.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer } from "react-toast";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")).render(
       <ThemeProvider>
         <AuthProvider>
           <RouterProvider router={router} />
+          <ToastContainer position="top-right" delay={3500} />
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>

@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../ui/PrimaryButton";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toast";
+import usePageTitle from "../hooks/usePageTitle";
 
 const Login = () => {
+  usePageTitle("Login");
   const { signIn, signInWithGoogle, resetPass } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -159,12 +161,12 @@ const Login = () => {
 
         <p className="mt-4 text-[11px] text-center text-slate-500">
           New here?{" "}
-          <a
-            href="/register"
+          <Link
+            to="/register"
             className="font-semibold text-[#6B4DF8] hover:text-[#5A3DE7] transition-colors"
           >
             Create an account
-          </a>
+          </Link>
         </p>
       </div>
     </div>

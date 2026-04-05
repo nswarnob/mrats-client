@@ -7,8 +7,10 @@ import axiosPublic from "../../../api/axiosPublic";
 import { toast } from "react-toast";
 import useLoans from "../../hooks/useLoans";
 import useLoan from "../../hooks/useLoan";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const ApplyLoan = () => {
+  usePageTitle("Apply Loan");
   const { user } = useContext(AuthContext);
 
   const { id } = useParams();

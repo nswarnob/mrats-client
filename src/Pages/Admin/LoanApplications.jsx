@@ -2,8 +2,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 import axiosPublic from "../../../api/axiosPublic";
 import { toast } from "react-toast";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const LoanApplications = () => {
+  usePageTitle("Loan Applications");
   const [apps, setApps] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");

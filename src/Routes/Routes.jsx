@@ -12,13 +12,15 @@ import PendingLoans from "../Pages/Admin/PendingLoans";
 import ApprovedLoans from "../Pages/Admin/ApprovedLoans";
 import LoanApplications from "../Pages/Admin/LoanApplications";
 import AllLoans from "../Pages/AllLoans";
-import Contact from "../ui/Contact";
-import AboutUs from "../ui/AboutUs";
+import ContactPage from "../Pages/ContactPage";
+import AboutPage from "../Pages/AboutPage";
 import PrivateRoute from "./PrivateRoute";
 import RoleRoute from "./RoleRoute";
 import DashboardProfile from "../Components/Dashboard/DashboardProfile";
 import MyLoans from "../Components/Dashboard/MyLoans";
 import LoanDetails from "../Pages/LoanDetails";
+import AddLoan from "../Pages/Admin/AddLoan";
+import NotFound from "../Pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -43,11 +45,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "contact",
-        element: <Contact></Contact>,
+        element: <ContactPage></ContactPage>,
       },
       {
         path: "about",
-        element: <AboutUs></AboutUs>,
+        element: <AboutPage></AboutPage>,
       },
       {
         path: "loan/:id",
@@ -56,6 +58,10 @@ export const router = createBrowserRouter([
             <LoanDetails></LoanDetails>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
@@ -136,6 +142,22 @@ export const router = createBrowserRouter([
         path: "my-loans",
         element: <MyLoans></MyLoans>,
       },
+      {
+        path: "add-loan",
+        element: (
+          <RoleRoute allowedRoles={["manager", "admin"]}>
+            <AddLoan />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);

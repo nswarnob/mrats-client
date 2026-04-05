@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axiosPublic from "../../../api/axiosPublic";
 import { toast } from "react-toast";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const ManageUser = () => {
+  usePageTitle("Manage Users");
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [suspendReason, setSuspendReason] = useState("");

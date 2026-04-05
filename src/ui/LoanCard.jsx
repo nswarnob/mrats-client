@@ -50,7 +50,9 @@ const LoanCard = ({ title, category, interest, maxLimit, onView, loan }) => {
               className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors duration-300"
               whileHover={{ x: 4 }}
             >
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Interest Rate:</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300">
+                Interest Rate:
+              </span>
               <span className="font-bold text-[#6B4DF8]">{interest}</span>
             </motion.div>
 
@@ -58,7 +60,9 @@ const LoanCard = ({ title, category, interest, maxLimit, onView, loan }) => {
               className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors duration-300"
               whileHover={{ x: 4 }}
             >
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Max Limit:</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300">
+                Max Limit:
+              </span>
               <span className="font-bold text-[#6B4DF8]">{maxLimit}</span>
             </motion.div>
           </motion.div>

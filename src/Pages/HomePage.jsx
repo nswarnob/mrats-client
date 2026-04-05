@@ -5,8 +5,10 @@ import Contact from "../ui/Contact";
 import AvailableLoans from "../ui/AvailableLoans";
 import Hero from "../ui/Hero";
 import HowItWorks from "../ui/HowItWorks";
+import usePageTitle from "../hooks/usePageTitle";
 
 const HomePage = () => {
+  usePageTitle("Home");
   return (
     <div className="space-y-20">
       {/* Hero */}
