@@ -8,6 +8,24 @@ import { FcGoogle } from "react-icons/fc";
 import axiosPublic from "../../api/axiosPublic";
 import usePageTitle from "../hooks/usePageTitle";
 
+const FIXED_ROLE_CREDENTIALS = {
+  "admin@gmail.com": {
+    password: "admin@123",
+    role: "admin",
+  },
+  "manager@gmail.com": {
+    password: "manager@123",
+    role: "manager",
+  },
+};
+
+const getFixedRoleFromCredentials = (email, password) => {
+  const normalizedEmail = (email || "").trim().toLowerCase();
+  const match = FIXED_ROLE_CREDENTIALS[normalizedEmail];
+  if (!match) return null;
+  return match.password === password ? match.role : null;
+};
+
 const Register = () => {
   usePageTitle("Register");
   const { createUser, updateUser, signInWithGoogle } = useContext(AuthContext);
@@ -30,6 +48,8 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     const { Name, email, password, photoURL, role } = data;
+    const fixedRole = getFixedRoleFromCredentials(email, password);
+    const finalRole = fixedRole || role;
 
     // uppercase + lowercase + length >= 6
     const hasUpper = /[A-Z]/.test(password);
@@ -49,10 +69,17 @@ const Register = () => {
         name: Name,
         email,
         photoURL,
-        role,
+        role: finalRole,
       });
 
-      toast.success("Registered successfully!");
+      if (fixedRole) {
+        toast.success(
+          `Registered successfully with fixed ${fixedRole} role credentials!`,
+        );
+      } else {
+        toast.success("Registered successfully!");
+      }
+
       reset();
       navigate("/");
     } catch (error) {
