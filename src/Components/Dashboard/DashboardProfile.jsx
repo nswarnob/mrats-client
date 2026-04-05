@@ -44,8 +44,8 @@ const DashboardProfile = () => {
       </div>
 
       {/* Details card */}
-      <div className="rounded-2xl bg-white p-6 shadow-md shadow-slate-100 border border-slate-100">
-        <h2 className="text-sm font-semibold text-slate-900 mb-4">
+      <div className="rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-md shadow-slate-100 dark:shadow-slate-950/40 border border-slate-100 dark:border-slate-800">
+        <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-4">
           Profile Details
         </h2>
 

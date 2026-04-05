@@ -20,7 +20,7 @@ const HomePage = () => {
       </section>
 
       {/* How it works */}
-      <section className="mt-14 rounded-3xl bg-white p-6 shadow-lg">
+      <section className="mt-14 rounded-3xl bg-white dark:bg-slate-900 p-6 shadow-lg dark:shadow-slate-950/40">
         <HowItWorks></HowItWorks>
       </section>
 
@@ -30,7 +30,7 @@ const HomePage = () => {
       </section>
 
       {/* Contact */}
-      <section className="rounded-3xl bg-white">
+      <section className="rounded-3xl bg-white dark:bg-slate-900 dark:shadow-slate-950/40">
         <Contact></Contact>
       </section>
     </div>

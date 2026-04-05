@@ -7,10 +7,15 @@ import Register from "../Pages/Register";
 import ApplyLoan from "../Components/Dashboard/ApplyLoan";
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import ManageUser from "../Pages/Admin/ManageUser";
+import ManageLoans from "../Pages/Admin/ManageLoans";
+import PendingLoans from "../Pages/Admin/PendingLoans";
+import ApprovedLoans from "../Pages/Admin/ApprovedLoans";
+import LoanApplications from "../Pages/Admin/LoanApplications";
 import AllLoans from "../Pages/AllLoans";
 import Contact from "../ui/Contact";
 import AboutUs from "../ui/AboutUs";
 import PrivateRoute from "./PrivateRoute";
+import RoleRoute from "./RoleRoute";
 import DashboardProfile from "../Components/Dashboard/DashboardProfile";
 import MyLoans from "../Components/Dashboard/MyLoans";
 import LoanDetails from "../Pages/LoanDetails";
@@ -59,8 +64,7 @@ export const router = createBrowserRouter([
     element: (
       <PrivateRoute>
         {" "}
-        <DashboardLayout></DashboardLayout>
-        {" "}
+        <DashboardLayout></DashboardLayout>{" "}
       </PrivateRoute>
     ),
     children: [
@@ -78,7 +82,51 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-users",
-        element: <ManageUser></ManageUser>,
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <ManageUser />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "all-loan",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <AllLoans />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "manage-loans",
+        element: (
+          <RoleRoute allowedRoles={["manager", "admin"]}>
+            <ManageLoans />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "pending-loans",
+        element: (
+          <RoleRoute allowedRoles={["manager", "admin"]}>
+            <PendingLoans />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "approved-loans",
+        element: (
+          <RoleRoute allowedRoles={["manager", "admin"]}>
+            <ApprovedLoans />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "loan-applications",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <LoanApplications />
+          </RoleRoute>
+        ),
       },
       {
         path: "profile",

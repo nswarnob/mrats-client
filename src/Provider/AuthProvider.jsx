@@ -19,17 +19,40 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState("borrower");
+  const [userRole, setUserRole] = useState("borrower");
   const [loading, setLoading] = useState(true);
+  const [userSuspended, setUserSuspended] = useState(false);
 
-  // ✅ Create JWT cookie after login/register
+  // ✅ Load full user profile from /me endpoint (backend may not have it yet)
+  const loadUserProfile = async () => {
+    try {
+      const res = await axiosPublic.get("/me");
+      setUser(res.data);
+      setUserRole(res.data?.role || "borrower");
+      setUserSuspended(res.data?.suspended || false);
+    } catch (err) {
+      // Silently fail if /me doesn't exist (404) - backend may not be updated yet
+      if (err.response?.status === 404) {
+        return; // Fall back to JWT-based role
+      }
+      // Log actual errors (not 404)
+      console.error("Failed to load user profile:", err.message);
+      setUser(null);
+      setUserRole("borrower");
+      setUserSuspended(false);
+    }
+  };
+
+  // ✅ Create JWT cookie after login/register (legacy support)
   const createJwtCookie = async (email) => {
     try {
       const res = await axiosPublic.get(`/users/role?email=${email}`);
       const dbRole = res.data?.role || "borrower";
-      setRole(dbRole);
+      setUserRole(dbRole);
 
       await axiosPublic.post("/jwt", { email, role: dbRole });
+      // Now load full profile from /me
+      await loadUserProfile();
     } catch (err) {
       console.error("JWT cookie create failed:", err);
     }
@@ -72,7 +95,8 @@ const AuthProvider = ({ children }) => {
 
     await signOut(auth);
     setUser(null);
-    setRole("borrower");
+    setUserRole("borrower");
+    setUserSuspended(false);
     toast.success("Logout Successful!");
   };
 
@@ -96,7 +120,8 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         await createJwtCookie(currentUser.email);
       } else {
-        setRole("borrower");
+        setUserRole("borrower");
+        setUserSuspended(false);
       }
 
       setLoading(false);
@@ -108,8 +133,8 @@ const AuthProvider = ({ children }) => {
   const authData = {
     createUser,
     user,
-    role,
-    setRole,
+    userRole,
+    setUserRole,
     setUser,
     signIn,
     logOut,
@@ -117,6 +142,7 @@ const AuthProvider = ({ children }) => {
     updateUser,
     signInWithGoogle,
     loading,
+    userSuspended,
   };
 
   return (

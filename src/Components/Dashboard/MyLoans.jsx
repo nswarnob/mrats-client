@@ -15,7 +15,7 @@ const MyLoans = ({ onView, onCancel, onPay }) => {
 
       {/* No loans */}
       {loans.length === 0 && (
-        <div className="p-6 bg-white rounded-2xl shadow-md border border-slate-100 text-center text-sm text-slate-600">
+        <div className="p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md dark:shadow-slate-950/40 border border-slate-100 dark:border-slate-800 text-center text-sm text-slate-600 dark:text-slate-300">
           You haven't applied for any loans yet.{" "}
           <Link
             className="text-xs font-semibold text-[#6B4DF8]"
@@ -29,9 +29,9 @@ const MyLoans = ({ onView, onCancel, onPay }) => {
 
       {/* Table */}
       {loans.length > 0 && (
-        <div className="overflow-x-auto rounded-2xl shadow-md border border-slate-100 bg-white">
+        <div className="overflow-x-auto rounded-2xl shadow-md border border-slate-100 bg-white dark:bg-slate-900 dark:border-slate-800">
           <table className="w-full text-sm">
-            <thead className="bg-purple-50 text-slate-700">
+            <thead className="bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-slate-200">
               <tr>
                 <th className="py-3 px-4 text-left">Loan ID</th>
                 <th className="py-3 px-4 text-left">Loan Info</th>
@@ -70,8 +70,8 @@ const MyLoans = ({ onView, onCancel, onPay }) => {
                         loan.status === "Approved"
                           ? "bg-green-100 text-green-700"
                           : loan.status === "Rejected"
-                          ? "bg-red-100 text-red-700"
-                          : "bg-yellow-100 text-yellow-700"
+                            ? "bg-red-100 text-red-700"
+                            : "bg-yellow-100 text-yellow-700"
                       }`}
                     >
                       {loan.status}

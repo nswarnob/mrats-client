@@ -134,7 +134,7 @@ const DashboardLayout = () => {
         </aside>
 
         {/* MAIN CONTENT AREA */}
-        <main className="flex-1 rounded-2xl bg-white p-6 shadow-2xl shadow-black/20 text-slate-900">
+        <main className="flex-1 rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl shadow-black/20 dark:shadow-black/40 text-slate-900 dark:text-slate-100">
           <Outlet />
         </main>
       </div>

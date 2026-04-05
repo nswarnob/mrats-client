@@ -22,13 +22,13 @@ const AllLoans = () => {
       data = data.filter(
         (loan) =>
           loan.title?.toLowerCase().includes(term) ||
-          loan.category?.toLowerCase().includes(term)
+          loan.category?.toLowerCase().includes(term),
       );
     }
 
     if (categoryFilter !== "all") {
       data = data.filter(
-        (loan) => loan.category?.toLowerCase() === categoryFilter.toLowerCase()
+        (loan) => loan.category?.toLowerCase() === categoryFilter.toLowerCase(),
       );
     }
 
@@ -64,12 +64,12 @@ const AllLoans = () => {
         {/* Search + Filter */}
         <div className="flex flex-col gap-3 md:flex-row md:items-center">
           {/* Search */}
-          <div className="flex items-center rounded-full border border-purple-100 bg-white px-3 py-1.5 shadow-sm shadow-purple-100/60 md:w-64">
+          <div className="flex items-center rounded-full border border-purple-100 bg-white dark:bg-slate-950 dark:border-slate-700 px-3 py-1.5 shadow-sm shadow-purple-100/60 dark:shadow-slate-950/20 md:w-64">
             <FiSearch className="text-xs text-slate-400" />
             <input
               type="text"
               placeholder="Search by title or category"
-              className="ml-2 w-full bg-transparent text-xs text-black outline-none placeholder:text-slate-300"
+              className="ml-2 w-full bg-transparent text-xs text-black dark:text-slate-100 outline-none placeholder:text-slate-300 dark:placeholder:text-slate-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -77,7 +77,7 @@ const AllLoans = () => {
 
           {/* Category filter */}
           <select
-            className="rounded-full outline-none bg-white px-3 py-1.5 text-xs text-black shadow-sm shadow-purple-100/60"
+            className="rounded-full outline-none bg-white dark:bg-slate-950 dark:text-slate-100 px-3 py-1.5 text-xs text-black dark:shadow-slate-950/20 shadow-sm shadow-purple-100/60"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
           >
@@ -113,7 +113,7 @@ const AllLoans = () => {
           {filteredLoans.map((loan) => (
             <article
               key={loan._id}
-              className="group flex flex-col rounded-2xl bg-white shadow-md shadow-purple-100/60 ring-1 ring-slate-100 transition hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-200/70"
+              className="group flex flex-col rounded-2xl bg-white dark:bg-slate-900 shadow-md shadow-purple-100/60 dark:shadow-slate-950/40 ring-1 ring-slate-100 dark:ring-slate-800 transition hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-200/70"
             >
               {/* Image */}
               <div className="relative h-40 overflow-hidden rounded-t-2xl bg-linear-to-tr from-purple-100 to-purple-200">

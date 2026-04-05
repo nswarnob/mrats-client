@@ -17,7 +17,7 @@ const LoanDetails = () => {
   useMemo(() => {
     if (isError) {
       toast.error(
-        error?.response?.data?.message || "Failed to load loan details"
+        error?.response?.data?.message || "Failed to load loan details",
       );
     }
   }, [isError, error]);
@@ -46,7 +46,7 @@ const LoanDetails = () => {
 
   return (
     <div className="px-4 py-12">
-      <div className="mx-auto max-w-5xl rounded-3xl bg-white p-8 shadow-xl shadow-purple-200/70">
+      <div className="mx-auto max-w-5xl rounded-3xl bg-white dark:bg-slate-900 p-8 shadow-xl shadow-purple-200/70 dark:shadow-slate-950/50">
         <div className="grid gap-8 md:grid-cols-2">
           {/* Image */}
           <div className="overflow-hidden rounded-2xl bg-linear-to-tr from-purple-100 to-purple-200">
@@ -67,9 +67,11 @@ const LoanDetails = () => {
               {description}
             </p>
 
-            <div className="mt-6 grid gap-3 rounded-2xl bg-purple-50/50 p-4 ring-1 ring-purple-100">
+            <div className="mt-6 grid gap-3 rounded-2xl bg-purple-50/50 dark:bg-slate-800 p-4 ring-1 ring-purple-100 dark:ring-slate-700">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-600">Interest Rate</span>
+                <span className="text-slate-600 dark:text-slate-300">
+                  Interest Rate
+                </span>
                 <span className="font-semibold text-slate-900">
                   {interest}%
                 </span>
@@ -94,7 +96,7 @@ const LoanDetails = () => {
                   {emiPlans.map((emi, idx) => (
                     <span
                       key={idx}
-                      className="rounded-full bg-white px-3 py-1 text-xs font-medium text-purple-700 ring-1 ring-purple-100"
+                      className="rounded-full bg-white dark:bg-slate-950 px-3 py-1 text-xs font-medium text-purple-700 ring-1 ring-purple-100 dark:ring-slate-700"
                     >
                       {emi} months
                     </span>

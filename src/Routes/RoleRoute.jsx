@@ -1,18 +1,17 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import { Navigate, useLocation } from "react-router";
+import { Navigate } from "react-router";
 import Loader from "../ui/Loader";
 
-const PrivateRoute = ({ children }) => {
-  const { user, loading, userSuspended } = useContext(AuthContext);
-  const location = useLocation();
+const RoleRoute = ({ allowedRoles = [], children }) => {
+  const { user, userRole, loading, userSuspended } = useContext(AuthContext);
 
   if (loading) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
   if (!user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (userSuspended) {
@@ -31,7 +30,11 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
+  if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
   return children;
 };
 
-export default PrivateRoute;
+export default RoleRoute;

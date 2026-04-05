@@ -68,7 +68,7 @@ const ApplyLoan = () => {
   useMemo(() => {
     if (loanError) {
       toast.error(
-        error?.response?.data?.message || "Failed to load selected loan"
+        error?.response?.data?.message || "Failed to load selected loan",
       );
     }
   }, [loanError, error]);
@@ -117,11 +117,11 @@ const ApplyLoan = () => {
 
   return (
     <div className="px-4 py-10">
-      <div className="mx-auto max-w-2xl rounded-3xl bg-white p-8 shadow-xl shadow-purple-200/70">
-        <h1 className="text-2xl font-semibold text-slate-900">
+      <div className="mx-auto max-w-2xl rounded-3xl bg-white dark:bg-slate-900 p-8 shadow-xl shadow-purple-200/70 dark:shadow-slate-950/50">
+        <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">
           Apply for Loan
         </h1>
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
           Select a loan and submit your microloan application.
         </p>
 
@@ -140,7 +140,7 @@ const ApplyLoan = () => {
                 {...register("selectedLoanId", {
                   required: "Please select a loan",
                 })}
-                className="mt-1 w-full rounded-xl border border-purple-100 bg-purple-50/30 px-3 py-2 text-sm focus:border-[#6B4DF8] focus:ring-2 focus:ring-purple-200"
+                className="mt-1 w-full rounded-xl border border-purple-100 bg-purple-50/30 dark:bg-slate-950 dark:text-slate-100 dark:border-slate-700 px-3 py-2 text-sm focus:border-[#6B4DF8] focus:ring-2 focus:ring-purple-200"
               >
                 <option value="">
                   {loadingList ? "Loading loans..." : "Select one"}
@@ -183,8 +183,8 @@ const ApplyLoan = () => {
                 loadingLoan
                   ? "Loading..."
                   : interestRate
-                  ? `${interestRate}%`
-                  : ""
+                    ? `${interestRate}%`
+                    : ""
               }
               className="mt-1 w-full rounded-xl border border-purple-100 bg-purple-50/50 px-3 py-2 text-sm text-slate-500"
             />
