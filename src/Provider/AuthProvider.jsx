@@ -43,14 +43,13 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ Create JWT cookie after login/register (legacy support)
-  const createJwtCookie = async (email) => {
+  // Create backend JWT cookie from verified Firebase ID token
+  const createJwtCookie = async (firebaseUser) => {
     try {
-      const res = await axiosPublic.get(`/users/role?email=${email}`);
-      const dbRole = res.data?.role || "borrower";
-      setUserRole(dbRole);
-
-      await axiosPublic.post("/jwt", { email, role: dbRole });
+      if (!firebaseUser) return;
+      const idToken = await firebaseUser.getIdToken();
+      const res = await axiosPublic.post("/jwt", { idToken });
+      setUserRole(res.data?.role || "borrower");
       // Now load full profile from /me
       await loadUserProfile();
     } catch (err) {
@@ -69,7 +68,7 @@ const AuthProvider = ({ children }) => {
   const signIn = async (email, password) => {
     setLoading(true);
     const result = await signInWithEmailAndPassword(auth, email, password);
-    await createJwtCookie(result.user.email);
+    await createJwtCookie(result.user);
 
     toast.success("Login successful!");
     return result;
@@ -80,7 +79,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     const result = await signInWithPopup(auth, googleProvider);
 
-    await createJwtCookie(result.user.email);
+    await createJwtCookie(result.user);
     toast.success("Login successful!");
     return result;
   };
@@ -117,8 +116,8 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
 
-      if (currentUser?.email) {
-        await createJwtCookie(currentUser.email);
+      if (currentUser) {
+        await createJwtCookie(currentUser);
       } else {
         setUserRole("borrower");
         setUserSuspended(false);
