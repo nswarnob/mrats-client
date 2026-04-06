@@ -63,6 +63,27 @@ const ManageLoans = () => {
     }
   };
 
+  const deleteLoan = async (id, title) => {
+    if (userRole !== "admin") return;
+
+    const confirmed = window.confirm(
+      `Delete loan "${title}"? This action cannot be undone.`,
+    );
+    if (!confirmed) return;
+
+    setUpdatingId(id);
+    try {
+      await axiosPublic.delete(`/loans/${id}`);
+      setLoanList((prev) => prev.filter((loan) => loan._id !== id));
+      toast.success("Loan deleted successfully");
+    } catch (err) {
+      console.error("Failed to delete loan:", err);
+      toast.error(err?.response?.data?.message || "Failed to delete loan");
+    } finally {
+      setUpdatingId(null);
+    }
+  };
+
   if (loading) {
     return <p className="text-sm text-slate-500">Loading loans...</p>;
   }
@@ -148,6 +169,15 @@ const ManageLoans = () => {
                 <button className="text-sm font-semibold text-[#6B4DF8] hover:text-purple-700">
                   Edit details
                 </button>
+                {userRole === "admin" && (
+                  <button
+                    onClick={() => deleteLoan(loan._id, loan.title)}
+                    disabled={updatingId === loan._id}
+                    className="rounded-full bg-red-600 px-4 py-2 text-xs font-semibold text-white hover:bg-red-700 disabled:opacity-50"
+                  >
+                    {updatingId === loan._id ? "Deleting..." : "Delete Loan"}
+                  </button>
+                )}
               </div>
             </div>
           ))

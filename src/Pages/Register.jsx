@@ -47,9 +47,9 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    const { Name, email, password, photoURL, role } = data;
+    const { Name, email, password, photoURL } = data;
     const fixedRole = getFixedRoleFromCredentials(email, password);
-    const finalRole = fixedRole || role;
+    const finalRole = fixedRole || "borrower";
 
     // uppercase + lowercase + length >= 6
     const hasUpper = /[A-Z]/.test(password);
@@ -111,9 +111,9 @@ const Register = () => {
     <div className="flex justify-center">
       <div className="mx-auto max-w-md rounded-3xl bg-white p-8 shadow-xl shadow-purple-200/70">
         <h1 className="text-2xl font-semibold text-slate-900">Register</h1>
-        <p className="mt-1 text-xs text-slate-500">
-          Create an account as borrower or manager.
-        </p>
+          <p className="mt-1 text-xs text-slate-500">
+            Create an account as borrower.
+          </p>
 
         <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)}>
           {/* Name */}
@@ -163,17 +163,8 @@ const Register = () => {
             />
           </div>
 
-          {/* Role */}
-          <div>
-            <label className="text-xs font-medium text-slate-700">Role</label>
-            <select
-              {...register("role")}
-              className="mt-1 w-full rounded-xl border border-purple-100 bg-purple-50/40 px-3 py-2 text-sm focus:border-[#6B4DF8] focus:ring-2 focus:ring-purple-200"
-            >
-              <option value="borrower">Borrower</option>
-              <option value="manager">Manager</option>
-            </select>
-          </div>
+          {/* Role fixed to borrower for public registration */}
+          <input type="hidden" value="borrower" {...register("role")} />
 
           {/* Password */}
           <div>

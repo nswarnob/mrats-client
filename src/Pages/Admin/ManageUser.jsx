@@ -115,6 +115,25 @@ const ManageUser = () => {
     }
   };
 
+  const handleDeleteUser = async (id, email) => {
+    const confirmed = window.confirm(
+      `Delete user ${email}? This action cannot be undone.`,
+    );
+    if (!confirmed) return;
+
+    setUpdatingId(id);
+    try {
+      await axiosPublic.delete(`/users/${id}`);
+      setUsers((prev) => prev.filter((user) => user._id !== id));
+      toast.success("User deleted successfully");
+    } catch (err) {
+      console.error("Failed to delete user:", err);
+      toast.error(err?.response?.data?.message || "Failed to delete user");
+    } finally {
+      setUpdatingId(null);
+    }
+  };
+
   const cancelSuspend = () => {
     setSelectedUserId(null);
     setSuspendReason("");
@@ -190,23 +209,32 @@ const ManageUser = () => {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right">
-                    {!user.suspended ? (
+                    <div className="inline-flex items-center gap-2">
+                      {!user.suspended ? (
+                        <button
+                          onClick={() => handleSuspend(user._id)}
+                          disabled={updatingId === user._id}
+                          className="rounded-full border border-red-100 bg-red-50 px-3 py-1 text-[11px] text-red-500 hover:bg-red-100 disabled:opacity-50"
+                        >
+                          Suspend
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleUnsuspend(user._id)}
+                          disabled={updatingId === user._id}
+                          className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[11px] text-emerald-700 hover:bg-emerald-100 disabled:opacity-50"
+                        >
+                          Reinstate
+                        </button>
+                      )}
                       <button
-                        onClick={() => handleSuspend(user._id)}
+                        onClick={() => handleDeleteUser(user._id, user.email)}
                         disabled={updatingId === user._id}
-                        className="rounded-full border border-red-100 bg-red-50 px-3 py-1 text-[11px] text-red-500 hover:bg-red-100 disabled:opacity-50"
+                        className="rounded-full border border-red-200 bg-red-600 px-3 py-1 text-[11px] text-white hover:bg-red-700 disabled:opacity-50"
                       >
-                        Suspend
+                        Delete
                       </button>
-                    ) : (
-                      <button
-                        onClick={() => handleUnsuspend(user._id)}
-                        disabled={updatingId === user._id}
-                        className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[11px] text-emerald-700 hover:bg-emerald-100 disabled:opacity-50"
-                      >
-                        Reinstate
-                      </button>
-                    )}
+                    </div>
                   </td>
                 </tr>
 
