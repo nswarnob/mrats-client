@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userSuspended, setUserSuspended] = useState(false);
 
-  // ✅ Load full user profile from /me endpoint (backend may not have it yet)
+  // ✅ Load full user profile from /me endpoint to get role and suspension status
   const loadUserProfile = async () => {
     try {
       const res = await axiosPublic.get("/me");

@@ -32,7 +32,9 @@ const MyLoans = () => {
   }, [loans]);
 
   const refetchMyLoans = () => {
-    queryClient.invalidateQueries({ queryKey: ["my-applications", user?.email] });
+    queryClient.invalidateQueries({
+      queryKey: ["my-applications", user?.email],
+    });
   };
 
   const handleCancel = async (loan) => {
@@ -190,7 +192,9 @@ const MyLoans = () => {
                         className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-600 text-white flex items-center gap-1 hover:bg-purple-700"
                       >
                         <FiDollarSign className="text-xs" />{" "}
-                        {loadingActionId === loan._id ? "Processing..." : "Pay $10"}
+                        {loadingActionId === loan._id
+                          ? "Processing..."
+                          : "Pay $10"}
                       </button>
                     )}
                   </td>
@@ -205,6 +209,17 @@ const MyLoans = () => {
                       <FiEye /> View
                     </button>
 
+                    {/* Pay - only if fee is unpaid */}
+                    {loan.feeStatus !== "Paid" &&
+                      loan.status === "Approved" && (
+                        <Link
+                          to={`/dashboard/payment/${loan._id}`}
+                          className="px-3 py-1 rounded-full bg-green-50 text-green-700 flex items-center gap-1 text-xs hover:bg-green-100"
+                        >
+                          <FiDollarSign /> Pay
+                        </Link>
+                      )}
+
                     {/* Cancel only if Pending */}
                     {loan.status === "Pending" && (
                       <button
@@ -213,7 +228,9 @@ const MyLoans = () => {
                         className="px-3 py-1 rounded-full bg-red-50 text-red-700 flex items-center gap-1 text-xs hover:bg-red-100"
                       >
                         <FiXCircle />{" "}
-                        {loadingActionId === loan._id ? "Cancelling..." : "Cancel"}
+                        {loadingActionId === loan._id
+                          ? "Cancelling..."
+                          : "Cancel"}
                       </button>
                     )}
                   </td>
@@ -232,17 +249,20 @@ const MyLoans = () => {
             </h3>
             <div className="mt-4 grid gap-2 text-sm text-slate-700 dark:text-slate-300">
               <p>
-                <span className="font-semibold">Loan:</span> {viewingLoan.loanTitle}
+                <span className="font-semibold">Loan:</span>{" "}
+                {viewingLoan.loanTitle}
               </p>
               <p>
                 <span className="font-semibold">Amount:</span> $
                 {viewingLoan.loanAmount}
               </p>
               <p>
-                <span className="font-semibold">Status:</span> {viewingLoan.status}
+                <span className="font-semibold">Status:</span>{" "}
+                {viewingLoan.status}
               </p>
               <p>
-                <span className="font-semibold">Fee:</span> {viewingLoan.feeStatus}
+                <span className="font-semibold">Fee:</span>{" "}
+                {viewingLoan.feeStatus}
               </p>
               <p>
                 <span className="font-semibold">Submitted:</span>{" "}

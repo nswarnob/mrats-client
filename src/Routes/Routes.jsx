@@ -21,6 +21,7 @@ import MyLoans from "../Components/Dashboard/MyLoans";
 import LoanDetails from "../Pages/LoanDetails";
 import AddLoan from "../Pages/Admin/AddLoan";
 import NotFound from "../Pages/NotFound";
+import PaymentPage from "../Pages/Dashboard/PaymentPage";
 
 export const router = createBrowserRouter([
   {
@@ -149,6 +150,10 @@ export const router = createBrowserRouter([
             <AddLoan />
           </RoleRoute>
         ),
+      },
+      {
+        path: "payment/:applicationId",
+        element: <PaymentPage />,
       },
       {
         path: "*",
