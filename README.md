@@ -53,6 +53,22 @@ LoanLink solves this by offering a secure, role-based, and user-friendly loan ma
 - Cancel pending loan applications
 - Pay application fee (Stripe – demo integration)
 
+### 🧑‍💼 Manager Features
+
+- Add new loan products
+- Manage own loans
+- View pending applications
+- Approve or reject loan requests
+- View approved loans
+
+### 🛠️ Admin Features
+
+- Manage users and roles
+- Suspend users with reason
+- View all loans
+- Control which loans appear on Home page
+- View all loan applications with filters
+  
 ---
 
 ## 🧩 Technologies Used
@@ -78,23 +94,8 @@ LoanLink solves this by offering a secure, role-based, and user-friendly loan ma
 - Cookie Parser
 - CORS
 - Vercel (Serverless Deployment)
-
+  
 ---
 
----working---
 
-### 🧑‍💼 Manager Features
 
-- Add new loan products
-- Manage own loans
-- View pending applications
-- Approve or reject loan requests
-- View approved loans
-
-### 🛠️ Admin Features
-
-- Manage users and roles
-- Suspend users with reason
-- View all loans
-- Control which loans appear on Home page
-- View all loan applications with filters
