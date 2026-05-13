@@ -6,6 +6,7 @@ import {
   FiCheckCircle,
   FiClock,
   FiUser,
+  FiMessageSquare,
 } from "react-icons/fi";
 
 export const dashboardMenu = {
@@ -42,6 +43,11 @@ export const dashboardMenu = {
 
   borrower: [
     { label: "Overview", icon: FiHome, to: "/dashboard" },
+    {
+      label: "AI Assistant",
+      icon: FiMessageSquare,
+      to: "/dashboard/borrower/ai-assistant",
+    },
     { label: "My Loans", icon: FiCreditCard, to: "/dashboard/my-loans" },
     { label: "Apply for Loan", icon: FiPlus, to: "/dashboard/apply-loan" },
   ],

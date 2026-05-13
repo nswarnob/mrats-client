@@ -22,6 +22,7 @@ import LoanDetails from "../Pages/LoanDetails";
 import AddLoan from "../Pages/Admin/AddLoan";
 import NotFound from "../Pages/NotFound";
 import PaymentPage from "../Pages/Dashboard/PaymentPage";
+import AiLoanAssistant from "../Pages/Dashboard/Borrower/AiLoanAssistant";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ export const router = createBrowserRouter([
         path: "about",
         element: <AboutPage></AboutPage>,
       },
+
       {
         path: "loan/:id",
         element: (
@@ -86,6 +88,14 @@ export const router = createBrowserRouter([
       {
         path: "apply-loan/:id",
         element: <ApplyLoan></ApplyLoan>,
+      },
+      {
+        path: "borrower/ai-assistant",
+        element: (
+          <RoleRoute allowedRoles={["borrower"]}>
+            <AiLoanAssistant />
+          </RoleRoute>
+        ),
       },
       {
         path: "manage-users",

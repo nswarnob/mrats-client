@@ -125,7 +125,9 @@ const AddLoan = () => {
           )}
         </div>
         <div>
-          <label className="text-xs font-medium text-slate-700">Image URL</label>
+          <label className="text-xs font-medium text-slate-700">
+            Image URL
+          </label>
           <input
             type="url"
             {...register("image")}
