@@ -31,7 +31,7 @@ const AiLoanAssistant = () => {
     setLoading(true);
 
     try {
-      const { data } = await axiosSecure.post("/api/ai/loan-assistant", {
+      const { data } = await axiosSecure.post("/api/routes/loan-assistant", {
         prompt,
       });
 

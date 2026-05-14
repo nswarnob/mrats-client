@@ -165,33 +165,6 @@ const AboutUs = () => {
           })}
         </Swiper>
       </div>
-
-      {/* Stats section */}
-      <motion.div
-        className="mt-16 grid grid-cols-3 gap-4 md:gap-8 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        {[
-          { value: "10K+", label: "Users" },
-          { value: "5M+", label: "Loans Processed" },
-          { value: "99.9%", label: "Uptime" },
-        ].map((stat, idx) => (
-          <motion.div
-            key={idx}
-            whileHover={{ scale: 1.05, y: -4 }}
-            className="p-4 rounded-xl bg-purple-50/50 dark:bg-purple-900/20 border border-purple-200/50 dark:border-purple-700/30"
-          >
-            <div className="text-2xl md:text-3xl font-bold gradient-text">
-              {stat.value}
-            </div>
-            <div className="mt-2 text-xs md:text-sm text-slate-600 dark:text-slate-400 font-medium">
-              {stat.label}
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
     </motion.div>
   );
 };
